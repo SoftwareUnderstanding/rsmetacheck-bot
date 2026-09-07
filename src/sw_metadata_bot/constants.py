@@ -73,7 +73,7 @@ SUCCESSFUL_PUBLISH_ACTIONS = frozenset(
 # Multiple names exist for backward compatibility with older analysis runs.
 
 VERSION_FIELD_BOT = "sw_metadata_bot_version"
-"""Canonical field name for rsmetacheck-bot version in analysis records."""
+"""Canonical analysis-record key for bot version, kept as `sw_metadata_bot_version` for compatibility."""
 
 VERSION_FIELD_BOT_LEGACY = "bot_version"
 """Legacy/deprecated field name for bot version (used in analysis_runtime.py parameter names)."""

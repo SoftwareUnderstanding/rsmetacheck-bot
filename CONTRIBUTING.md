@@ -137,7 +137,7 @@ assets/
     ├── analysis_results.json
     ├── config.json
     ├── run_report.json
-    ├── github_com_softwareunderstanding_sw_metadata_bot/
+    ├── github_com_softwareunderstanding_rsmetacheck_bot/
     │   ├── issue_report.md
     │   ├── pitfall.jsonld
     │   ├── report.json
@@ -155,7 +155,7 @@ assets/
 - `analysis_results.json`: global analysis summary for the full run, including the repositories that were evaluated and metadata such as commit identifiers.
 - `config.json`: a copy of the effective configuration used for this snapshot, stored for reproducibility.
 - `run_report.json`: top-level decision report for the whole batch, with counters and one record per repository.
-- `github_com_softwareunderstanding_sw_metadata_bot/`: per-repository folder for `https://github.com/SoftwareUnderstanding/rsmetacheck-bot`; repository URLs are sanitized to lowercase folder names.
+- `github_com_softwareunderstanding_rsmetacheck_bot/`: per-repository folder for `https://github.com/SoftwareUnderstanding/rsmetacheck-bot`; repository URLs are sanitized to lowercase folder names.
 - `github_com_softwareunderstanding_rsmetacheck/`: per-repository folder for `https://github.com/SoftwareUnderstanding/RsMetaCheck`; it contains the same artifact set as the other repository folder.
 - `issue_report.md`: human-readable markdown report that can be reviewed before publication and reused as issue content.
 - `pitfall.jsonld`: raw RSMetacheck JSON-LD output for the repository, including detected checks and evidence.
