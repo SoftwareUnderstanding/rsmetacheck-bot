@@ -1,4 +1,4 @@
-"""Wrapper for rsmetacheck CLI to integrate with sw-metadata-bot."""
+"""Wrapper for rsmetacheck CLI to integrate with rsmetacheck-bot."""
 
 import sys
 from pathlib import Path

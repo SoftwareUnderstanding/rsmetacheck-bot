@@ -1,13 +1,13 @@
-# Docker Setup for sw-metadata-bot
+# Docker Setup for rsmetacheck-bot
 
-This guide helps you build and run the sw-metadata-bot using Docker containers.
+This guide helps you build and run the rsmetacheck-bot using Docker containers.
 
 ## Quick Start
 
 ### Build the Docker Image
 
 ```bash
-docker build -t sw-metadata-bot:latest .
+docker build -t rsmetacheck-bot:latest .
 ```
 
 ### Run the Container
@@ -15,7 +15,7 @@ docker build -t sw-metadata-bot:latest .
 #### Show Help
 
 ```bash
-docker run --rm sw-metadata-bot:latest sw-metadata-bot --help
+docker run --rm rsmetacheck-bot:latest rsmetacheck-bot --help
 ```
 
 #### Run Analysis with Config
@@ -24,8 +24,8 @@ docker run --rm sw-metadata-bot:latest sw-metadata-bot --help
 docker run --rm \
   -v /path/to/config.json:/app/config.json:ro \
   -v /path/to/outputs:/app/outputs \
-  sw-metadata-bot:latest \
-  sw-metadata-bot run-analysis --config /app/config.json
+  rsmetacheck-bot:latest \
+  rsmetacheck-bot run-analysis --config /app/config.json
 ```
 
 #### Run with Environment Variables
@@ -35,8 +35,8 @@ docker run --rm \
   -e GITHUB_TOKEN=your_token_here \
   -v /path/to/config.json:/app/config.json:ro \
   -v /path/to/outputs:/app/outputs \
-  sw-metadata-bot:latest \
-  sw-metadata-bot run-analysis --config /app/config.json
+  rsmetacheck-bot:latest \
+  rsmetacheck-bot run-analysis --config /app/config.json
 ```
 
 ## Docker Compose
@@ -47,13 +47,13 @@ For easier management, use Docker Compose:
 
 ```bash
 docker-compose build
-docker-compose run --rm bot sw-metadata-bot --help
+docker-compose run --rm bot rsmetacheck-bot --help
 ```
 
 ### Run Analysis
 
 ```bash
-docker-compose run --rm bot sw-metadata-bot run-analysis --config /app/config.json
+docker-compose run --rm bot rsmetacheck-bot run-analysis --config /app/config.json
 ```
 
 ### Development Container
@@ -145,8 +145,8 @@ Configure the bot via environment variables:
 docker run --rm \
   -e GITHUB_TOKEN=ghp_xxxx \
   -e GITLAB_TOKEN=glpat_xxxx \
-  sw-metadata-bot:latest \
-  sw-metadata-bot run-analysis --config /app/config.json
+  rsmetacheck-bot:latest \
+  rsmetacheck-bot run-analysis --config /app/config.json
 ```
 
 ### Volume Mounts
@@ -158,7 +158,7 @@ docker run --rm \
   -v $(pwd)/config.json:/app/config.json:ro \
   -v $(pwd)/outputs:/app/outputs \
   -v $(pwd)/assets:/app/assets:ro \
-  sw-metadata-bot:latest
+  rsmetacheck-bot:latest
 ```
 
 ## Troubleshooting
@@ -167,17 +167,17 @@ docker run --rm \
 
 ```bash
 # Check image exists
-docker images | grep sw-metadata-bot
+docker images | grep rsmetacheck-bot
 
 # View container logs
-docker run --rm sw-metadata-bot:latest
+docker run --rm rsmetacheck-bot:latest
 ```
 
 ### CLI not found
 
 ```bash
 # Verify installation
-docker run --rm sw-metadata-bot:latest python -c "import sw_metadata_bot; print('OK')"
+docker run --rm rsmetacheck-bot:latest python -c "import sw_metadata_bot; print('OK')"
 ```
 
 ### Permission denied errors
@@ -194,7 +194,7 @@ chmod 755 ./outputs
 ```bash
 docker run -it --rm \
   -v $(pwd):/workspace \
-  sw-metadata-bot:latest \
+  rsmetacheck-bot:latest \
   /bin/bash
 ```
 
@@ -205,13 +205,13 @@ docker network create bot-network
 docker run --rm \
   --network bot-network \
   --name bot \
-  sw-metadata-bot:latest
+  rsmetacheck-bot:latest
 ```
 
 ### Build specific Python version
 
 ```bash
-docker build --build-arg PYTHON_VERSION=3.11 -t sw-metadata-bot:py311 .
+docker build --build-arg PYTHON_VERSION=3.11 -t rsmetacheck-bot:py311 .
 ```
 
 ## Publishing to Registry
@@ -220,20 +220,20 @@ docker build --build-arg PYTHON_VERSION=3.11 -t sw-metadata-bot:py311 .
 
 ```bash
 # Build
-docker build -t ghcr.io/yourorg/sw-metadata-bot:v1.0.0 .
+docker build -t ghcr.io/yourorg/rsmetacheck-bot:v1.0.0 .
 
 # Login (use PAT token)
 docker login ghcr.io
 
 # Push
-docker push ghcr.io/yourorg/sw-metadata-bot:v1.0.0
+docker push ghcr.io/yourorg/rsmetacheck-bot:v1.0.0
 ```
 
 ### Pull from Registry
 
 ```bash
-docker pull ghcr.io/yourorg/sw-metadata-bot:v1.0.0
-docker run --rm ghcr.io/yourorg/sw-metadata-bot:v1.0.0
+docker pull ghcr.io/yourorg/rsmetacheck-bot:v1.0.0
+docker run --rm ghcr.io/yourorg/rsmetacheck-bot:v1.0.0
 ```
 
 ## Development Workflow
@@ -259,7 +259,7 @@ docker-compose run --rm bot ruff format .
 ```bash
 docker run -it --rm \
   -v $(pwd):/workspace \
-  sw-metadata-bot:latest \
+  rsmetacheck-bot:latest \
   /bin/bash
 ```
 

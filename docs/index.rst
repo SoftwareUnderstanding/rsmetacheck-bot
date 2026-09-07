@@ -1,4 +1,4 @@
-Welcome to sw-metadata-bot's documentation
+Welcome to rsmetacheck-bot's documentation
 ==========================================
 
 An automated bot that analyzes repository metadata quality and creates issues with improvement suggestions.
@@ -20,19 +20,19 @@ Install from PyPI:
 
 .. code-block:: bash
 
-   pip install sw-metadata-bot
+   pip install rsmetacheck-bot
 
 Run analysis with a campaign configuration file:
 
 .. code-block:: bash
 
-   sw-metadata-bot run-analysis --config-file path/to/config.json
+   rsmetacheck-bot run-analysis --config-file path/to/config.json
 
 Review the generated snapshot, then publish the approved results:
 
 .. code-block:: bash
 
-   sw-metadata-bot publish --analysis-root outputs/<run_name>/<snapshot_tag>
+   rsmetacheck-bot publish --analysis-root outputs/<run_name>/<snapshot_tag>
 
 For installation choices, configuration examples, and token setup, see
 :doc:`installation` and :doc:`usage`.

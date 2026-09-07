@@ -1,7 +1,7 @@
 API Reference
 =============
 
-This section documents all modules and functions in the sw-metadata-bot package.
+This section documents all modules and functions in the `sw_metadata_bot` Python package used by the rsmetacheck-bot distribution.
 
 Analysis Runtime Module
 -----------------------

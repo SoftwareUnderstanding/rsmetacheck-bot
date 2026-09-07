@@ -16,7 +16,7 @@ writes reports, but does not call the GitHub or GitLab APIs.
 
 .. code-block:: bash
 
-   sw-metadata-bot run-analysis \
+   rsmetacheck-bot run-analysis \
      --config-file assets/ossr_list_url.json
 
 Options:
@@ -42,7 +42,7 @@ corresponding GitHub or GitLab side effects to create, update, or close issues. 
 
 .. code-block:: bash
 
-   sw-metadata-bot publish --analysis-root outputs/ossr/20260325
+   rsmetacheck-bot publish --analysis-root outputs/ossr/20260325
 
 Options:
 
@@ -57,7 +57,7 @@ retry flag after fixing the cause or waiting for backoff.
 
 .. code-block:: bash
 
-    sw-metadata-bot publish \
+    rsmetacheck-bot publish \
        --analysis-root outputs/ossr/<snapshot> \
        --retry-failed
 
@@ -75,14 +75,14 @@ the required permissions.
 
 .. code-block:: bash
 
-   sw-metadata-bot verify-tokens
+   rsmetacheck-bot verify-tokens
 
 Examples:
 
 .. code-block:: bash
 
-   sw-metadata-bot verify-tokens --github
-   sw-metadata-bot verify-tokens --gitlab --json
+   rsmetacheck-bot verify-tokens --github
+   rsmetacheck-bot verify-tokens --gitlab --json
 
 Options:
 
@@ -104,13 +104,13 @@ Example Workflow
 
    .. code-block:: bash
 
-      sw-metadata-bot run-analysis --config-file assets/ossr_list_url.json
+      rsmetacheck-bot run-analysis --config-file assets/ossr_list_url.json
 
    To compare with an earlier run explicitly, pass the previous run report:
 
    .. code-block:: bash
 
-      sw-metadata-bot run-analysis \
+      rsmetacheck-bot run-analysis \
         --config-file assets/ossr_list_url.json \
         --previous-report outputs/ossr/20260325/run_report.json
 
@@ -125,7 +125,7 @@ Example Workflow
 
    .. code-block:: bash
 
-      sw-metadata-bot publish --analysis-root outputs/ossr/<snapshot>
+      rsmetacheck-bot publish --analysis-root outputs/ossr/<snapshot>
 
 
 Decision Tree for Issue Creation

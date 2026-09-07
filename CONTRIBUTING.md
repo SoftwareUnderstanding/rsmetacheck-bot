@@ -1,6 +1,6 @@
 # Contributing Guide
 
-Developer and maintainer steps to install, configure, and run sw-metadata-bot.
+Developer and maintainer steps to install, configure, and run rsmetacheck-bot.
 
 ## What the bot does
 
@@ -35,22 +35,22 @@ This will create the virtual environnment, download the dependencies and build t
 With `uv` (recommended):
 
 ```bash
-uv add sw-metadata-bot
+uv add rsmetacheck-bot
 ```
 
 Or with pip
 With `pip`:
 
 ```bash
-pip install sw-metadata-bot
+pip install rsmetacheck-bot
 ```
 
 The package metadata also exposes standard extras for release builds:
 
 ```bash
-pip install "sw-metadata-bot[docs]"
-pip install "sw-metadata-bot[test]"
-pip install "sw-metadata-bot[dev]"
+pip install "rsmetacheck-bot[docs]"
+pip install "rsmetacheck-bot[test]"
+pip install "rsmetacheck-bot[dev]"
 ```
 
 ## Configure authentication
@@ -93,7 +93,7 @@ Example config:
 ```json
 {
   "repositories": [
-    "https://github.com/SoftwareUnderstanding/sw-metadata-bot",
+    "https://github.com/SoftwareUnderstanding/rsmetacheck-bot",
     "https://github.com/SoftwareUnderstanding/RsMetaCheck"
   ],
   "issues": {
@@ -116,14 +116,14 @@ Example config:
 To run the bot, start with analysis.
 
 ```bash
-uv run sw-metadata-bot run-analysis \
+uv run rsmetacheck-bot run-analysis \
   --config-file assets/ossr_list_url.json
 ```
 
 You can override the generated snapshot tag when needed.
 
 ```bash
-uv run sw-metadata-bot run-analysis \
+uv run rsmetacheck-bot run-analysis \
   --config-file <path_to_your_config.json> \
   --snapshot-tag <example_suffix>
 ```
@@ -137,7 +137,7 @@ assets/
     ├── analysis_results.json
     ├── config.json
     ├── run_report.json
-    ├── github_com_softwareunderstanding_sw_metadata_bot/
+    ├── github_com_softwareunderstanding_rsmetacheck_bot/
     │   ├── issue_report.md
     │   ├── pitfall.jsonld
     │   ├── report.json
@@ -155,7 +155,7 @@ assets/
 - `analysis_results.json`: global analysis summary for the full run, including the repositories that were evaluated and metadata such as commit identifiers.
 - `config.json`: a copy of the effective configuration used for this snapshot, stored for reproducibility.
 - `run_report.json`: top-level decision report for the whole batch, with counters and one record per repository.
-- `github_com_softwareunderstanding_sw_metadata_bot/`: per-repository folder for `https://github.com/SoftwareUnderstanding/sw-metadata-bot`; repository URLs are sanitized to lowercase folder names.
+- `github_com_softwareunderstanding_rsmetacheck_bot/`: per-repository folder for `https://github.com/SoftwareUnderstanding/rsmetacheck-bot`; repository URLs are sanitized to lowercase folder names.
 - `github_com_softwareunderstanding_rsmetacheck/`: per-repository folder for `https://github.com/SoftwareUnderstanding/RsMetaCheck`; it contains the same artifact set as the other repository folder.
 - `issue_report.md`: human-readable markdown report that can be reviewed before publication and reused as issue content.
 - `pitfall.jsonld`: raw RSMetacheck JSON-LD output for the repository, including detected checks and evidence.
@@ -169,13 +169,13 @@ The exact repository folder names depend on the repository URLs in your config, 
 If you want to submit the analysis to the actual repositories, you can publish from an existing analysis snapshot (no new analysis is generated):
 
 ```bash
-uv run sw-metadata-bot publish \
+uv run rsmetacheck-bot publish \
   --analysis-root outputs/ossr/<snapshot_tag>
 ```
 
 This requires setting up environment variables `GITHUB_API_TOKEN` / `GITLAB_API_TOKEN` with working tokens.
 We recommend creating a `.env` file.
-You can use the `uv run sw-metadata-bot verify-tokens` command to test them after set up.
+You can use the `uv run rsmetacheck-bot verify-tokens` command to test them after set up.
 
 ## Troubleshooting
 
@@ -186,7 +186,7 @@ You can use the `uv run sw-metadata-bot verify-tokens` command to test them afte
 - **Publish failed because of transient API issues**: Fix the cause (for example wait for rate-limit reset or refresh token), then rerun publish with retry mode:
 
 ```bash
-uv run sw-metadata-bot publish \
+uv run rsmetacheck-bot publish \
   --analysis-root outputs/ossr/<snapshot_tag> \
   --retry-failed
 ```

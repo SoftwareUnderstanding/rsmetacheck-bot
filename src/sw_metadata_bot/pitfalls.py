@@ -75,7 +75,7 @@ def format_report(
     report = "# Metadata Quality Report\n\n"
     report += f"**Repository:** {repo_url}\n"
     report += f"**Analysis Date:** {datetime.now().strftime('%Y-%m-%d')}\n"
-    report += f"**sw-metadata-bot version:** {__version__}\n"
+    report += f"**rsmetacheck-bot version:** {__version__}\n"
     report += f"**RSMetacheck version:** {get_rsmetacheck_version(data)}\n\n"
 
     if pitfalls:
@@ -135,16 +135,16 @@ This is a first initiative aimed at identifying and reporting metadata quality i
 At this stage, we only provide diagnostics and recommendations. 
 In future iterations, we plan to propose automated fixes for the detected issues to further simplify the improvement process and reduce manual effort.
 Feedbacks are welcome and will help us improve the tool and its recommendations.
-[![Feedbacks](https://img.shields.io/badge/feedbacks-blue?style=for-the-badge)](https://github.com/SoftwareUnderstanding/sw-metadata-bot/issues/new?template=feedback.yml)
+[![Feedbacks](https://img.shields.io/badge/feedbacks-blue?style=for-the-badge)](https://github.com/SoftwareUnderstanding/rsmetacheck-bot/issues/new?template=feedback.yml)
 
 Each pitfall and warning is identified by a unique code (e.g. P001 for pitfalls, W004 for warnings) that corresponds to specific metadata quality issues.
-You can find more details about these checks and how to address them in the [RSMetacheck catalog](https://softwareunderstanding.github.io/RsMetaCheck/).
+You can find more details about these checks and how to address them in the [RsMetaCheck catalog](https://softwareunderstanding.github.io/RsMetaCheck/).
 
 
 {report}
 ---
 
-This report was generated automatically by [sw-metadata-bot](https://github.com/SoftwareUnderstanding/sw-metadata-bot) on your main default branch.
+This report was generated automatically by [rsmetacheck-bot](https://github.com/SoftwareUnderstanding/rsmetacheck-bot) on your main default branch.
 
 If you're not interested in participating, please comment "unsubscribe" and we will remove your repository from our list.
 If you would like the pitfalls and warnings to be fixed automatically, please comment "auto-fix" and we will prioritize adding this feature in future iterations.
