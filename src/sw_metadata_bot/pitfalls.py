@@ -138,7 +138,7 @@ Feedbacks are welcome and will help us improve the tool and its recommendations.
 [![Feedbacks](https://img.shields.io/badge/feedbacks-blue?style=for-the-badge)](https://github.com/SoftwareUnderstanding/rsmetacheck-bot/issues/new?template=feedback.yml)
 
 Each pitfall and warning is identified by a unique code (e.g. P001 for pitfalls, W004 for warnings) that corresponds to specific metadata quality issues.
-You can find more details about these checks and how to address them in the [RSMetaCheck catalog](https://softwareunderstanding.github.io/RsMetaCheck/).
+You can find more details about these checks and how to address them in the [RsMetaCheck catalog](https://softwareunderstanding.github.io/RsMetaCheck/).
 
 
 {report}
