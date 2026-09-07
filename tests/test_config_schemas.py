@@ -9,7 +9,7 @@ from sw_metadata_bot.config.schemas import BotConfig
 CONFIG_DATA = {
     "analysis": {
         "repositories": [
-            "https://github.com/SoftwareUnderstanding/sw-metadata-bot",
+            "https://github.com/SoftwareUnderstanding/rsmetacheck-bot",
             "https://github.com/example/repo3",
         ],
         "rsmetacheck_config_file": "rsmetacheck.toml",
@@ -27,7 +27,7 @@ CONFIG_DATA = {
 
 CONFIG_DATA_MINIMAL = {
     "analysis": {
-        "repositories": ["https://github.com/SoftwareUnderstanding/sw-metadata-bot"]
+        "repositories": ["https://github.com/SoftwareUnderstanding/rsmetacheck-bot"]
     },
 }
 
@@ -35,13 +35,13 @@ CONFIG_DATA_INVALID = {
     "analysis": {"repositories": []},
     "issues": {
         "custom_issue_message": "This is a custom issue message.",
-        "opt_outs": ["https://github.com/SoftwareUnderstanding/sw-metadata-bot"],
+        "opt_outs": ["https://github.com/SoftwareUnderstanding/rsmetacheck-bot"],
     },
 }
 
 CONFIG_DATA_INVALID_OPT_OUT = {
     "analysis": {
-        "repositories": ["https://github.com/SoftwareUnderstanding/sw-metadata-bot"]
+        "repositories": ["https://github.com/SoftwareUnderstanding/rsmetacheck-bot"]
     },
     "issues": {
         "custom_issue_message": "This is a custom issue message.",

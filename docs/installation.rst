@@ -22,33 +22,33 @@ Using uv (recommended)
 
 .. code-block:: bash
 
-   uv add sw-metadata-bot
+   uv add rsmetacheck-bot
 
 Using pip
 ~~~~~~~~~
 
 .. code-block:: bash
 
-   pip install sw-metadata-bot
+   pip install rsmetacheck-bot
 
 Optional extras for documentation, tests, and development tooling are exposed
 through the package metadata:
 
 .. code-block:: bash
 
-   pip install "sw-metadata-bot[docs]"
-   pip install "sw-metadata-bot[test]"
-   pip install "sw-metadata-bot[dev]"
+   pip install "rsmetacheck-bot[docs]"
+   pip install "rsmetacheck-bot[test]"
+   pip install "rsmetacheck-bot[dev]"
 
 From source for contributors
 ----------------------------
 
 .. code-block:: bash
 
-   git clone https://github.com/SoftwareUnderstanding/sw-metadata-bot.git
-   cd sw-metadata-bot
+   git clone https://github.com/SoftwareUnderstanding/rsmetacheck-bot.git
+   cd rsmetacheck-bot
    uv sync
-   uv run sw-metadata-bot --help
+   uv run rsmetacheck-bot --help
 
 For local development with the optional dependency sets declared in
 ``pyproject.toml``:

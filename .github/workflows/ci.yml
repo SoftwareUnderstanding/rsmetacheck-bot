@@ -82,8 +82,8 @@ jobs:
       - name: Runtime smoke checks
         run: |
           uv run python -c "import sw_metadata_bot; import rsmetacheck; print('Runtime imports OK')"
-          uv run sw-metadata-bot run-analysis --help
-          uv run sw-metadata-bot publish --help
+          uv run rsmetacheck-bot run-analysis --help
+          uv run rsmetacheck-bot publish --help
 
       - name: Run pytest unit tests with coverage
         run: |
@@ -117,7 +117,7 @@ jobs:
         uses: ./.github/actions/setup-uv
 
       - name: Run small analysis without publishing
-        run: uv run sw-metadata-bot run-analysis --config-file assets/example_list_repo.json
+        run: uv run rsmetacheck-bot run-analysis --config-file assets/example_list_repo.json
 
   test-gitlab-integration:
     name: Test (GitLab integration)
@@ -139,7 +139,7 @@ jobs:
           exit 0
 
       - name: Verify GitLab token before integration tests
-        run: uv run sw-metadata-bot verify-tokens --gitlab
+        run: uv run rsmetacheck-bot verify-tokens --gitlab
 
       - name: Run GitLab integration tests
         run: uv run pytest --run-integration-gitlab -m "integration_gitlab" tests/test_gitlab_integration.py
@@ -254,5 +254,5 @@ jobs:
           eossr-upload-repository \
             --token "${{ secrets.ZENODO_ACCESS_TOKEN }}" \
             --input-dir . \
-            --archive-name "sw-metadata-bot-${{ github.event.release.tag_name }}.zip" \
+            --archive-name "rsmetacheck-bot-${{ github.event.release.tag_name }}.zip" \
             --record_id "${{ secrets.ZENODO_DEPOSITION_ID }}"

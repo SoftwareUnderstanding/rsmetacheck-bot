@@ -1,6 +1,6 @@
 name: "💬 Early Adopter Feedback"
 description: >
-  Share your experience using sw-metadata-bot, RSMetaCheck, or any CodeMetaSoft tool.
+  Share your experience using rsmetacheck-bot, RSMetaCheck, or any CodeMetaSoft tool.
   Your feedback directly shapes the project roadmap.
 labels: ["feedback", "early-adopter"]
 title: "[Feedback] <brief summary of your experience>"
@@ -12,7 +12,7 @@ body:
         ## Thanks for using CodeMetaSoft tools! 🎉
         
         This form covers feedback for:
-        - **[sw-metadata-bot](https://github.com/SoftwareUnderstanding/sw-metadata-bot)** — the GitHub/GitLab metadata bot
+        - **[rsmetacheck-bot](https://github.com/SoftwareUnderstanding/rsmetacheck-bot)** — the GitHub/GitLab metadata bot
         - **[RSMetaCheck](https://github.com/SoftwareUnderstanding/RsMetaCheck)** — the metadata analysis tool
         - **[CodeMetaSoft project tools](https://softwareunderstanding.github.io/CodeMetaSoft_website/website/)** — any other tool in the ecosystem
         
@@ -25,7 +25,7 @@ body:
       description: Select the tool(s) you used.
       multiple: true
       options:
-        - sw-metadata-bot (GitHub/GitLab bot)
+        - rsmetacheck-bot (GitHub/GitLab bot)
         - RSMetaCheck (CLI / analysis tool)
         - Autocodemeta
         - Somef

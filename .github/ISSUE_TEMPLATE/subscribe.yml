@@ -1,6 +1,6 @@
-name: "🤖 Subscribe to sw-metadata-bot"
+name: "🤖 Subscribe to rsmetacheck-bot"
 description: >
-  Request sw-metadata-bot to analyze your GitHub or GitLab repository
+  Request rsmetacheck-bot to analyze your GitHub or GitLab repository
   and open issues with metadata improvement suggestions.
 labels: ["subscribe", "bot-request"]
 title: "[Subscribe] <your-org/your-repo>"
@@ -9,7 +9,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Subscribe to sw-metadata-bot 🤖
+        ## Subscribe to rsmetacheck-bot 🤖
         
         The bot will analyze your repository's metadata quality using **[RSMetaCheck](https://github.com/SoftwareUnderstanding/RsMetaCheck)** 
         and open an issue with:

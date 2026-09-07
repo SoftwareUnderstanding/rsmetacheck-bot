@@ -1,4 +1,4 @@
-"""CLI entry point for sw-metadata-bot."""
+"""CLI entry point for rsmetacheck-bot."""
 
 import click
 

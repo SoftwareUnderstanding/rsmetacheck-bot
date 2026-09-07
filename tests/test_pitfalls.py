@@ -197,7 +197,7 @@ def test_create_issue_body(sample_data):
     issue_body = create_issue_body(report)
 
     assert "CodeMetaSoft" in issue_body
-    assert "sw-metadata-bot" in issue_body
+    assert "rsmetacheck-bot" in issue_body
     assert report in issue_body
     assert "unsubscribe" in issue_body
     assert "suggested codemeta.json" in issue_body

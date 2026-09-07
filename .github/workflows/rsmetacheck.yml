@@ -27,7 +27,7 @@ jobs:
       - name: Run RSMetacheck
         uses: SoftwareUnderstanding/rs-metacheck-action@0.3.4
         with:
-          input: "https://github.com/SoftwareUnderstanding/sw-metadata-bot"
+          input: "https://github.com/SoftwareUnderstanding/rsmetacheck-bot"
           branch: $GITHUB_REF
           pitfalls_output: ./pitfalls_output
           verbose: true

@@ -17,5 +17,5 @@ MIT
 
 For issues, suggestions, or questions about the bot:
 
-- GitHub: [codemetasoft/sw-metadata-bot](https://github.com/codemetasoft/sw-metadata-bot)
+- GitHub: [codemetasoft/rsmetacheck-bot](https://github.com/codemetasoft/rsmetacheck-bot)
 - Documentation: [CodeMetaSoft](https://w3id.org/codemetasoft)

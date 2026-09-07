@@ -3,9 +3,9 @@ requires = ["setuptools>=69", "wheel>= 0.47.0, <0.48.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sw-metadata-bot"
+name = "rsmetacheck-bot"
 version = "0.5.4.dev1"
-description = "Metadata quality bot for software repositories, leveraging metacheck for analysis and GitHub/GitLab APIs for issue management."
+description = "Metadata quality bot for software repositories, leveraging rsmetacheck for analysis and GitHub/GitLab APIs for issue management."
 readme = "README.md"
 requires-python = ">=3.11,<3.13"
 license = "MIT"
@@ -29,12 +29,12 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/SoftwareUnderstanding/sw-metadata-bot"
-Repository = "https://github.com/SoftwareUnderstanding/sw-metadata-bot"
-Issues = "https://github.com/SoftwareUnderstanding/sw-metadata-bot/issues"
+Homepage = "https://github.com/SoftwareUnderstanding/rsmetacheck-bot"
+Repository = "https://github.com/SoftwareUnderstanding/rsmetacheck-bot"
+Issues = "https://github.com/SoftwareUnderstanding/rsmetacheck-bot/issues"
 
 [project.scripts]
-sw-metadata-bot = "sw_metadata_bot.main:main"
+rsmetacheck-bot = "sw_metadata_bot.main:main"
 
 [project.optional-dependencies]
 dev = [

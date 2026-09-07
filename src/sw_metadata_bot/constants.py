@@ -1,4 +1,4 @@
-"""Centralized constants for sw-metadata-bot configuration and workflow.
+"""Centralized constants for rsmetacheck-bot configuration and workflow.
 
 This module defines all magic strings, field names, action values, and other
 constants used throughout the codebase. Centralizing these here prevents
@@ -73,7 +73,7 @@ SUCCESSFUL_PUBLISH_ACTIONS = frozenset(
 # Multiple names exist for backward compatibility with older analysis runs.
 
 VERSION_FIELD_BOT = "sw_metadata_bot_version"
-"""Canonical field name for sw-metadata-bot version in analysis records."""
+"""Canonical field name for rsmetacheck-bot version in analysis records."""
 
 VERSION_FIELD_BOT_LEGACY = "bot_version"
 """Legacy/deprecated field name for bot version (used in analysis_runtime.py parameter names)."""
