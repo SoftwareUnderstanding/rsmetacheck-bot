@@ -63,11 +63,28 @@ def _patch_clients(monkeypatch, github_client, gitlab_client=None):
 
 
 def _write_run_report(snapshot_dir, records, run_metadata=None):
-    """Write a minimal run_report.json for testing."""
+    """Write a minimal run_report.json for testing with repo-centric state layout."""
     payload = {"records": records}
     if run_metadata:
         payload["run_metadata"] = run_metadata
     (snapshot_dir / "run_report.json").write_text(json.dumps(payload))
+
+    for record in records:
+        repo_url = record.get("repo_url")
+        if not isinstance(repo_url, str) or not repo_url:
+            continue
+        from sw_metadata_bot.config.config_utils import sanitize_repo_name
+
+        repo_folder = snapshot_dir / sanitize_repo_name(repo_url)
+        repo_folder.mkdir(parents=True, exist_ok=True)
+        (repo_folder / "current-state.json").write_text(
+            json.dumps({"repo_url": repo_url, "action": record.get("action")}),
+            encoding="utf-8",
+        )
+        (repo_folder / "event-log.jsonl").write_text(
+            json.dumps({"event": "analysis_completed"}) + "\n",
+            encoding="utf-8",
+        )
 
 
 def _write_issue_report(snapshot_dir, repo_url, body="Issue body text"):

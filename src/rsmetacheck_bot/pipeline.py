@@ -145,6 +145,11 @@ def run_pipeline(
     requested_snapshot_tag = config.resolve_snapshot_tag(snapshot_tag)
 
     run_root = output_root / run_folder_name
+    if run_root.exists():
+        repo_state.require_repo_centric_layout(
+            run_root,
+            command_name="run-analysis",
+        )
     run_root.mkdir(parents=True, exist_ok=True)
     resolved_snapshot_tag = _resolve_unique_snapshot_tag(
         run_root=run_root,
@@ -172,7 +177,10 @@ def run_pipeline(
     run_records: list[dict[str, object]] = []
 
     for repo_url in repositories:
-        per_repo = repo_state.resolve_repo_state_paths(analysis_root, repo_url)
+        # Choose base folder for per-repo state: flattened under the run root
+        # when enabled, otherwise keep per-snapshot nesting.
+        base_for_repo = run_root if config.get_flatten_repo_layout() else analysis_root
+        per_repo = repo_state.resolve_repo_state_paths(base_for_repo, repo_url)
         repo_folder = per_repo["repo_folder"]
         repo_state.ensure_repo_state_dirs(per_repo)
 

@@ -19,6 +19,12 @@ from .reporting import RunReport, load_report
 )
 def summarize_report_command(analysis_root: Path):
     """Summarize report.json file and save the summary file in the analysis root folder."""
+    from . import repo_state
+
+    repo_state.require_repo_centric_layout(
+        analysis_root,
+        command_name="report-summary",
+    )
     summary = summarize_analysis_folder(analysis_root)
 
     save_summary_report(analysis_root, summary)

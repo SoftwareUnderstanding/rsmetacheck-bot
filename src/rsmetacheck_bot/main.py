@@ -2,11 +2,13 @@
 
 import click
 
+from .convert_legacy import convert_legacy_command
+from .fetch import fetch_command
 from .pipeline import run_analysis_command
 from .publish import publish_command, simulate_publish_command
+from .query_history import query_history_command
 from .report_summary import summarize_report_command
 from .verify_tokens import verify_tokens_command
-from .fetch import fetch_command
 
 
 @click.group()
@@ -26,6 +28,8 @@ cli.add_command(publish_command, name="publish")
 cli.add_command(simulate_publish_command, name="simulate-publish")
 cli.add_command(summarize_report_command, name="report-summary")
 cli.add_command(fetch_command, name="fetch")
+cli.add_command(query_history_command, name="query-history")
+cli.add_command(convert_legacy_command, name="convert-legacy")
 
 
 def main():

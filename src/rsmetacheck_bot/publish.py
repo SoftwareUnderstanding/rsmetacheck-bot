@@ -244,6 +244,10 @@ def publish_analysis(
     gitlab_client: gitlab_api.GitLabAPI | None = None,
 ) -> None:
     """Publish issues from an existing analysis snapshot without re-running analysis."""
+    repo_state.require_repo_centric_layout(
+        analysis_root,
+        command_name="publish",
+    )
     run_report_file = analysis_root / constants.FILENAME_RUN_REPORT
     try:
         run_report = utils.load_json_file(

@@ -134,6 +134,10 @@ def fetch_analysis(
     gitlab_client: gitlab_api.GitLabAPI | None = None,
 ) -> None:
     """Fetch status from previously created issues for an existing analysis snapshot."""
+    repo_state.require_repo_centric_layout(
+        analysis_root,
+        command_name="fetch",
+    )
     run_report_file = analysis_root / constants.FILENAME_RUN_REPORT
     run_report = load_report(run_report_file)
 

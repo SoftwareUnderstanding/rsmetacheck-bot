@@ -57,16 +57,24 @@ def convert_legacy_output_tree(
     target_root = (target_root or snapshot_root).resolve()
     target_root.mkdir(parents=True, exist_ok=True)
 
+    repo_dirs = _iter_legacy_repo_dirs(snapshot_root)
+    print(f"[convert-legacy] Converting legacy snapshot: {snapshot_root}")
+    print(f"[convert-legacy] Target root: {target_root}")
+
     converted: list[Path] = []
-    for repo_dir in _iter_legacy_repo_dirs(snapshot_root):
+    for repo_dir in repo_dirs:
         repo_name = sanitize_repo_name(repo_dir.name)
         repo_folder = target_root / repo_name
-        repo_paths = repo_state.resolve_repo_state_paths(
-            target_root, f"https://example.invalid/{repo_name}"
-        )
-        repo_paths["repo_folder"].mkdir(parents=True, exist_ok=True)
+        repo_paths = {
+            "repo_folder": repo_folder,
+            "event_log": repo_folder / constants.FILENAME_EVENT_LOG,
+            "current_state": repo_folder / constants.FILENAME_CURRENT_STATE,
+            "analyses_folder": repo_folder / constants.DIRNAME_ANALYSES,
+            "issues_folder": repo_folder / constants.DIRNAME_ISSUES,
+        }
         repo_state.ensure_repo_state_dirs(repo_paths)
 
+        copied_files = []
         for filename in (
             constants.FILENAME_PITFALL,
             constants.FILENAME_SOMEF_OUTPUT,
@@ -75,7 +83,10 @@ def convert_legacy_output_tree(
             constants.FILENAME_CODEMETA_STATUS,
             constants.FILENAME_CODEMETA_GENERATED,
         ):
-            _copy_if_present(repo_dir / filename, repo_folder / filename)
+            source = repo_dir / filename
+            if source.exists():
+                _copy_if_present(source, repo_folder / filename)
+                copied_files.append(filename)
 
         legacy_report = _load_json_if_present(repo_dir / constants.FILENAME_REPORT)
         if isinstance(legacy_report, dict):
@@ -99,13 +110,21 @@ def convert_legacy_output_tree(
                         },
                     )
 
+        print(
+            f"[convert-legacy]   - {repo_dir.name} -> {repo_folder} "
+            f"({len(copied_files)} file(s) copied)"
+        )
         converted.append(snapshot_root)
 
     legacy_run_report = snapshot_root / constants.FILENAME_RUN_REPORT
     if legacy_run_report.exists():
         target_run_report = target_root / constants.FILENAME_RUN_REPORT
         shutil.copy2(legacy_run_report, target_run_report)
+        print(f"[convert-legacy]   - copied run_report.json to {target_run_report}")
 
+    print(
+        f"[convert-legacy] Finished: {len(repo_dirs)} repository directory(s) converted."
+    )
     return converted
 
 
