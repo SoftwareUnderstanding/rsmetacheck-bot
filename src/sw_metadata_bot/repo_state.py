@@ -1,13 +1,76 @@
 """Repository-state helpers for the new repo-centric output layout."""
 
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+import click
+
 from . import constants
 from .config.config_utils import sanitize_repo_name
+
+LEGACY_SNAPSHOT_DIR_RE = re.compile(r"^\d{8}(?:_\d+)?$")
+
+
+def detect_legacy_snapshot_layout(path: Path) -> bool:
+    """Return True when the directory still follows the legacy snapshot layout."""
+    if path is None or not path.exists() or not path.is_dir():
+        return False
+
+    child_dirs = [
+        child
+        for child in path.iterdir()
+        if child.is_dir()
+        and child.name not in {constants.DIRNAME_ANALYSES, constants.DIRNAME_ISSUES}
+    ]
+    if not child_dirs:
+        return False
+
+    if any(
+        (child / constants.FILENAME_CURRENT_STATE).exists()
+        or (child / constants.FILENAME_EVENT_LOG).exists()
+        for child in child_dirs
+    ):
+        return False
+
+    legacy_markers = (
+        constants.FILENAME_PITFALL,
+        constants.FILENAME_SOMEF_OUTPUT,
+        constants.FILENAME_REPORT,
+        constants.FILENAME_ISSUE_REPORT,
+        constants.FILENAME_RUN_REPORT,
+        constants.FILENAME_ANALYSIS_RESULTS,
+    )
+    return bool(
+        path.exists()
+        and (path / constants.FILENAME_RUN_REPORT).exists()
+        and any(
+            any((child / marker).exists() for marker in legacy_markers)
+            for child in child_dirs
+        )
+    )
+
+
+def require_repo_centric_layout(path: Path, *, command_name: str) -> None:
+    """Abort when a legacy snapshot layout is detected with migration guidance."""
+    if not detect_legacy_snapshot_layout(path):
+        return
+
+    hint_path = path
+    if path.name and LEGACY_SNAPSHOT_DIR_RE.fullmatch(path.name):
+        hint_path = path.parent
+
+    raise click.ClickException(
+        "Legacy snapshot layout detected at "
+        f"{path}. This command expects the repo-centric state layout. "
+        "Convert the legacy output first with:\n"
+        f"  uv run sw-metadata-bot convert-legacy {hint_path} --target-root <converted-root>\n"
+        "If this is a parent folder containing dated snapshots, pass the specific "
+        "snapshot directory, not the parent folder."
+    )
 
 
 def resolve_repo_state_paths(output_root: Path, repo_url: str) -> dict[str, Path]:

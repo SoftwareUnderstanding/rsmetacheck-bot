@@ -85,6 +85,8 @@ The bot **does not**:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and usage instructions.
 
+Project storage policy: the repo-centric layout and migration rules are described in [docs/output_storage.rst](docs/output_storage.rst).
+
 The pipeline is config driven: one JSON file defines the repository list, issue message, inline opt-outs, and output layout.
 
 Supported platforms:
@@ -93,6 +95,36 @@ Supported platforms:
 - ✅ Gitlab.com
 
 The bot is handling self-hosted gitlab platform but requires providing a token to this server (and not gitlab.com).
+
+### Safe workflow for local validation
+
+Use these commands when validating the bot without creating live issues:
+
+1. Legacy snapshot conversion
+
+```bash
+uv run sw-metadata-bot convert-legacy outputs/legacy_snapshot --target-root outputs/converted
+```
+
+This converts a legacy snapshot tree into the current repo-centric layout without publishing anything.
+
+2. Fresh dry-run analysis from scratch
+
+```bash
+uv run sw-metadata-bot run-analysis --config-file config.json --snapshot-tag 202603
+```
+
+This writes analysis outputs and run reports, but remains dry-run and does not create issues.
+
+3. Simulated publish review
+
+```bash
+uv run sw-metadata-bot simulate-publish --analysis-root outputs/batch-a/202603
+```
+
+This replays the analysis decisions with a fake issue client so you can review the generated issue bodies and opt-out logic without spamming real repositories.
+
+> Avoid the live `publish` command unless you explicitly want to create or update real repository issues.
 
 ---
 

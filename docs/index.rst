@@ -11,6 +11,7 @@ Part of the `CodeMetaSoft <https://w3id.org/codemetasoft>`_ project.
 
    installation
    usage
+   output_storage
    api
 
 Quick Start

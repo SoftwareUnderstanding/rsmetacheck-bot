@@ -50,6 +50,7 @@ class OutputConfig(BaseModel):
     output_root_dir: Optional[str] = DEFAULT_OUTPUT_ROOT
     run_name: Optional[str] = None
     snapshot_tag_format: Optional[str] = DEFAULT_SNAPSHOT_TAG_FORMAT
+    flatten_repo_layout: bool = False
 
     @field_validator("snapshot_tag_format", mode="after")
     @classmethod
@@ -147,6 +148,10 @@ class BotConfig(BaseModel):
     def get_output_root_dir(self) -> str:
         """Return the configured output root directory."""
         return self.outputs.output_root_dir or DEFAULT_OUTPUT_ROOT
+
+    def get_flatten_repo_layout(self) -> bool:
+        """Return whether repo folders should be flattened under the run root (default: False)."""
+        return bool(getattr(self.outputs, "flatten_repo_layout", False))
 
     def get_snapshot_tag_format(self) -> str:
         """Return the configured snapshot tag format."""
