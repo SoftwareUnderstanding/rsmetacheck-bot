@@ -54,7 +54,7 @@ class ReportRecord:
     warnings_count: int | None = None
     issue_url: str | None = None
     analysis_date: str | None = None
-    sw_metadata_bot_version: str | None = None
+    rsmetacheck_bot_version: str | None = None
     rsmetacheck_version: str | None = None
     pitfalls_ids: tuple[str, ...] = ()
     warnings_ids: tuple[str, ...] = ()
@@ -83,7 +83,7 @@ class ReportRecord:
             "warnings_count": self.warnings_count,
             "issue_url": self.issue_url,
             "analysis_date": self.analysis_date,
-            "sw_metadata_bot_version": self.sw_metadata_bot_version,
+            "rsmetacheck_bot_version": self.rsmetacheck_bot_version,
             "rsmetacheck_version": self.rsmetacheck_version,
             "pitfalls_ids": list(self.pitfalls_ids),
             "warnings_ids": list(self.warnings_ids),
@@ -106,11 +106,13 @@ class ReportRecord:
 
     def get_tool_metadata(self) -> "ToolMetadata":
         """Retrieve tool versions information"""
-        sw_metadata_bot_version = (
-            self.sw_metadata_bot_version if not None else "unknown"
+        rsmetacheck_bot_version = (
+            self.rsmetacheck_bot_version if self.rsmetacheck_bot_version is not None else "unknown"
         )
-        rsmetacheck_version = self.rsmetacheck_version if not None else "unknown"
-        return ToolMetadata(sw_metadata_bot_version, rsmetacheck_version)
+        rsmetacheck_version = (
+            self.rsmetacheck_version if self.rsmetacheck_version is not None else "unknown"
+        )
+        return ToolMetadata(rsmetacheck_bot_version, rsmetacheck_version)
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Any]) -> "ReportRecord":
@@ -122,7 +124,7 @@ class ReportRecord:
             warnings_count=data.get("warnings_count"),
             issue_url=data.get("issue_url"),
             analysis_date=data.get("analysis_date"),
-            sw_metadata_bot_version=data.get("sw_metadata_bot_version"),
+            rsmetacheck_bot_version=data.get("rsmetacheck_bot_version"),
             rsmetacheck_version=data.get("rsmetacheck_version"),
             pitfalls_ids=tuple(data.get("pitfalls_ids") or ()),
             warnings_ids=tuple(data.get("warnings_ids") or ()),
@@ -148,7 +150,7 @@ class ReportRecord:
 class ToolMetadata:
     """Intermediate class to represent the rsmetacheck-bot metadata"""
 
-    sw_metadata_bot_version: str = "unknown"
+    rsmetacheck_bot_version: str = "unknown"
     rs_metacheck_version: str = "unknown"
 
     def to_dict(self):
