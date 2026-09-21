@@ -1,4 +1,4 @@
-"""Centralized utilities for common operations across sw-metadata-bot.
+"""Centralized utilities for common operations across rsmetacheck-bot.
 
 This module consolidates repeated patterns for JSON file handling, configuration
 validation, and path management. By centralizing these utilities, the codebase

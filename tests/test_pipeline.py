@@ -7,15 +7,15 @@ from pathlib import Path
 
 from click.testing import CliRunner
 
-from sw_metadata_bot import (
+from rsmetacheck_bot import (
     analysis_runtime,
     commit_lookup,
     constants,
     pipeline,
     rsmetacheck_wrapper,
 )
-from sw_metadata_bot import publish as publish_module
-from sw_metadata_bot.config.schemas import BotConfig
+from rsmetacheck_bot import publish as publish_module
+from rsmetacheck_bot.config.schemas import BotConfig
 
 # ---------------------------------------------------------------------------
 # is_previous_issue_open

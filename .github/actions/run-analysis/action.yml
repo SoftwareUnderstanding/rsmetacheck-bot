@@ -27,5 +27,5 @@ runs:
     - name: Run analysis
       id: run-analysis
       shell: bash
-      run: uv run sw-metadata-bot run-analysis --config-file assets/example_list_repo.json
+      run: uv run rsmetacheck-bot run-analysis --config-file assets/example_list_repo.json
         

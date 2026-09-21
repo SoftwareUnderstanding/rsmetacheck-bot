@@ -75,31 +75,31 @@ jobs:
           context: .
           push: false
           load: true
-          tags: sw-metadata-bot:test
+          tags: rsmetacheck-bot:test
           cache-from: type=gha
 
       - name: Test - Show help
         run: |
-          docker run --rm sw-metadata-bot:test
+          docker run --rm rsmetacheck-bot:test
 
       - name: Test - Check CLI commands
         run: |
-          docker run --rm sw-metadata-bot:test uv run sw-metadata-bot verify-tokens --help
-          docker run --rm sw-metadata-bot:test uv run sw-metadata-bot run-analysis --help
-          docker run --rm sw-metadata-bot:test uv run sw-metadata-bot publish --help
+          docker run --rm rsmetacheck-bot:test uv run rsmetacheck-bot verify-tokens --help
+          docker run --rm rsmetacheck-bot:test uv run rsmetacheck-bot run-analysis --help
+          docker run --rm rsmetacheck-bot:test uv run rsmetacheck-bot publish --help
 
       - name: Test - Health check
         run: |
-          docker run --rm sw-metadata-bot:test /bin/sh -c 'uv run sw-metadata-bot --help > /dev/null && echo "Health check passed"'
+          docker run --rm rsmetacheck-bot:test /bin/sh -c 'uv run rsmetacheck-bot --help > /dev/null && echo "Health check passed"'
 
       - name: Inspect image metadata
         run: |
           echo "=== Image Info ==="
-          docker inspect sw-metadata-bot:test | jq '.[0] | {Config: .Config, Architecture: .Architecture, SizeMB: (.Size / 1024 / 1024)}'
+          docker inspect rsmetacheck-bot:test | jq '.[0] | {Config: .Config, Architecture: .Architecture, SizeMB: (.Size / 1024 / 1024)}'
 
       - name: Inspect image size
         run: |
-          SIZE=$(docker image inspect sw-metadata-bot:test --format='{{json .Size}}' | jq '. / 1024 / 1024 | floor')
+          SIZE=$(docker image inspect rsmetacheck-bot:test --format='{{json .Size}}' | jq '. / 1024 / 1024 | floor')
           echo "Image size: ${SIZE}MB"
           if [ "$SIZE" -gt 500 ]; then
             echo "WARNING: Image size larger than expected (${SIZE}MB > 500MB)"

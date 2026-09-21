@@ -4,7 +4,7 @@ from pathlib import Path
 
 import click
 
-from sw_metadata_bot.config.schemas import BotConfig
+from rsmetacheck_bot.config.schemas import BotConfig
 
 from .. import constants
 

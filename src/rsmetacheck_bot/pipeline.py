@@ -7,7 +7,7 @@ from pathlib import Path
 
 import click
 
-from sw_metadata_bot.config.schemas import BotConfig
+from rsmetacheck_bot.config.schemas import BotConfig
 
 from . import __version__, analysis_runtime, commit_lookup, constants
 from .config.config_utils import detect_platform, sanitize_repo_name

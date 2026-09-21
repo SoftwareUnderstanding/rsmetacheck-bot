@@ -2,7 +2,7 @@
 
 import json
 
-from sw_metadata_bot.codemeta_runtime import (
+from rsmetacheck_bot.codemeta_runtime import (
     codemeta_detected_in_somef,
     evaluate_and_persist_codemeta_status,
 )

@@ -54,12 +54,12 @@
       "givenName": "Anas"
     }
   ],
-  "codeRepository": "https://github.com/SoftwareUnderstanding/sw-metadata-bot",
+  "codeRepository": "https://github.com/SoftwareUnderstanding/rsmetacheck-bot",
   "dateCreated": "2025-12-15",
   "dateModified": "2026-07-08",
   "datePublished": "2026-01-16",
   "description": "A repository to keep the code of the RSMetaCheck bot for pushing issues with existing repository metadata",
-  "downloadUrl": "https://github.com/SoftwareUnderstanding/sw-metadata-bot/releases",
+  "downloadUrl": "https://github.com/SoftwareUnderstanding/rsmetacheck-bot/releases",
   "keywords": [
     "codemeta",
     "bot",
@@ -67,7 +67,7 @@
     "metadata"
   ],
   "license": "https://spdx.org/licenses/MIT",
-  "name": "sw-metadata-bot",
+  "name": "rsmetacheck-bot",
   "programmingLanguage": [
     {
       "@type": "ComputerLanguage",
@@ -76,7 +76,7 @@
     }
   ],
   "runtimePlatform": "Python 3.11, Python 3.12",
-  "releaseNotes": "## What's Changed\n* Fix beta test feedbacks by @francoto in https://github.com/SoftwareUnderstanding/sw-metadata-bot/pull/7\n\n\n**Full Changelog**: https://github.com/SoftwareUnderstanding/sw-metadata-bot/compare/v0.1.0...v0.1.1",
+  "releaseNotes": "## What's Changed\n* Fix beta test feedbacks by @francoto in https://github.com/SoftwareUnderstanding/rsmetacheck-bot/pull/7\n\n\n**Full Changelog**: https://github.com/SoftwareUnderstanding/rsmetacheck-bot/compare/v0.1.0...v0.1.1",
   "softwareRequirements": [
     "click>=8.3.1",
     "rsmetacheck>=0.2.1",
@@ -92,9 +92,9 @@
     "email": "tom.francois@lapp.in2p3.fr",
     "@type": "Person"
   },
-  "readme": "https://raw.githubusercontent.com/SoftwareUnderstanding/sw-metadata-bot/main/README.md",
-  "continuousIntegration": "https://raw.githubusercontent.com/SoftwareUnderstanding/sw-metadata-bot/main/.github/workflows/ci.yml",
+  "readme": "https://raw.githubusercontent.com/SoftwareUnderstanding/rsmetacheck-bot/main/README.md",
+  "continuousIntegration": "https://raw.githubusercontent.com/SoftwareUnderstanding/rsmetacheck-bot/main/.github/workflows/ci.yml",
   "developmentStatus": "active",
-  "issueTracker": "https://github.com/SoftwareUnderstanding/sw-metadata-bot/issues",
+  "issueTracker": "https://github.com/SoftwareUnderstanding/rsmetacheck-bot/issues",
   "@type": "SoftwareSourceCode"
 }

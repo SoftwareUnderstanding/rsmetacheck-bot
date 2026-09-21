@@ -6,9 +6,9 @@ from pathlib import Path
 
 from click.testing import CliRunner
 
-from sw_metadata_bot import publish as publish_module
-from sw_metadata_bot.config.schemas import BotConfig
-from sw_metadata_bot.publish import publish_command
+from rsmetacheck_bot import publish as publish_module
+from rsmetacheck_bot.config.schemas import BotConfig
+from rsmetacheck_bot.publish import publish_command
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -72,7 +72,7 @@ def _write_run_report(snapshot_dir, records, run_metadata=None):
 
 def _write_issue_report(snapshot_dir, repo_url, body="Issue body text"):
     """Write a per-repo issue_report.md so publish can find the body."""
-    from sw_metadata_bot.config.config_utils import sanitize_repo_name
+    from rsmetacheck_bot.config.config_utils import sanitize_repo_name
 
     repo_folder = snapshot_dir / sanitize_repo_name(repo_url)
     repo_folder.mkdir(parents=True, exist_ok=True)

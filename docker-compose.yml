@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: sw-metadata-bot:latest
-    container_name: sw-metadata-bot
+    image: rsmetacheck-bot:latest
+    container_name: rsmetacheck-bot
     environment:
       # Configuration - customize as needed
       SW_METADATA_BOT_CONFIG: /app/config.json
@@ -21,7 +21,7 @@ services:
       # Mount input files if needed
       - ./assets:/app/assets:ro
     # Uncomment to override the default command
-    # command: uv run sw-metadata-bot run-analysis --config /app/config.json
+    # command: uv run rsmetacheck-bot run-analysis --config /app/config.json
     restart: "no"
 
   # Development container with dev dependencies
@@ -31,8 +31,8 @@ services:
       dockerfile: Dockerfile.dev
       args:
         PYTHON_VERSION: 3.12
-    image: sw-metadata-bot:dev
-    container_name: sw-metadata-bot-dev
+    image: rsmetacheck-bot:dev
+    container_name: rsmetacheck-bot-dev
     environment:
       PYTHONDONTWRITEBYTECODE: 1
       PYTHONUNBUFFERED: 1
@@ -41,7 +41,7 @@ services:
       - /workspace/.venv
     working_dir: /workspace
     # Run bot commands explicitly through uv in this dev container, for example:
-    # docker compose run --rm bot-dev uv run sw-metadata-bot --help
+    # docker compose run --rm bot-dev uv run rsmetacheck-bot --help
     command: /bin/bash
     stdin_open: true
     tty: true

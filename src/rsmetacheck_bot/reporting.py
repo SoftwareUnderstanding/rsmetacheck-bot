@@ -146,7 +146,7 @@ class ReportRecord:
 
 @dataclass(frozen=True)
 class ToolMetadata:
-    """Intermediate class to represent the sw-metadata-bot metadata"""
+    """Intermediate class to represent the rsmetacheck-bot metadata"""
 
     sw_metadata_bot_version: str = "unknown"
     rs_metacheck_version: str = "unknown"

@@ -2,7 +2,7 @@
 
 import json
 
-from sw_metadata_bot import history
+from rsmetacheck_bot import history
 
 
 def test_load_previous_report_indexes_only_posted_by_repo(tmp_path):

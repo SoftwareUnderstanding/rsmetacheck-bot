@@ -1,4 +1,4 @@
-# Development Dockerfile for sw-metadata-bot
+# Development Dockerfile for rsmetacheck-bot
 # Keeps the same uv + lockfile workflow as the runtime image, but adds dev extras.
 
 ARG PYTHON_VERSION=3.12

@@ -27,6 +27,6 @@ repos:
     hooks:
       - id: interrogate
         name: interrogate
-        entry: interrogate -c pyproject.toml -v src/sw_metadata_bot/
+        entry: interrogate -c pyproject.toml -v src/rsmetacheck_bot/
         pass_filenames: false
         always_run: true

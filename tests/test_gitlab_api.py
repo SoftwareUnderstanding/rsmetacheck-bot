@@ -2,7 +2,7 @@
 
 import pytest
 
-from sw_metadata_bot.gitlab_api import GitLabAPI
+from rsmetacheck_bot.gitlab_api import GitLabAPI
 
 
 @pytest.mark.parametrize(

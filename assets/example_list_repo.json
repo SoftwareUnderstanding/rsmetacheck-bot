@@ -2,7 +2,7 @@
   "version": "1.1.0",
   "analysis": {
     "repositories": [
-      "https://github.com/SoftwareUnderstanding/sw-metadata-bot",
+      "https://github.com/SoftwareUnderstanding/rsmetacheck-bot",
       "https://github.com/SoftwareUnderstanding/RsMetaCheck"
     ],
     "rsmetacheck_config_file": "./.github/workflows/rsmetacheck.toml"

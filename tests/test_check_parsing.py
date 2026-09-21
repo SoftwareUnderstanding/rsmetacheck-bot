@@ -1,6 +1,6 @@
 """Tests for shared check parsing helpers."""
 
-from sw_metadata_bot.check_parsing import (
+from rsmetacheck_bot.check_parsing import (
     extract_check_ids,
     get_check_catalog_id,
     get_short_check_code,

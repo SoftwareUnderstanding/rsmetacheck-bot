@@ -1,6 +1,6 @@
 """Tests for incremental decision engine."""
 
-from sw_metadata_bot import incremental
+from rsmetacheck_bot import incremental
 
 
 def test_new_repo_creates_issue():

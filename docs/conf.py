@@ -17,7 +17,7 @@ with (PROJECT_ROOT / "pyproject.toml").open("rb") as pyproject_file:
     pyproject = tomllib.load(pyproject_file)
 
 project_metadata = pyproject["project"]
-doc_metadata = pyproject.get("tool", {}).get("sw_metadata_bot", {}).get("docs", {})
+doc_metadata = pyproject.get("tool", {}).get("rsmetacheck_bot", {}).get("docs", {})
 
 author_names = [
     entry["name"]

@@ -17,4 +17,4 @@ ENV UV_NO_DEV=1
 WORKDIR /app
 RUN uv sync --locked
 
-CMD ["uv", "run", "sw-metadata-bot", "--help"]
+CMD ["uv", "run", "rsmetacheck-bot", "--help"]

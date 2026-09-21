@@ -1,12 +1,12 @@
 API Reference
 =============
 
-This section documents all modules and functions in the sw-metadata-bot package.
+This section documents all modules and functions in the rsmetacheck-bot package.
 
 Analysis Runtime Module
 -----------------------
 
-.. automodule:: sw_metadata_bot.analysis_runtime
+.. automodule:: rsmetacheck_bot.analysis_runtime
    :members:
    :undoc-members:
    :show-inheritance:
@@ -14,7 +14,7 @@ Analysis Runtime Module
 Check Parsing Module
 --------------------
 
-.. automodule:: sw_metadata_bot.check_parsing
+.. automodule:: rsmetacheck_bot.check_parsing
    :members:
    :undoc-members:
    :show-inheritance:
@@ -22,7 +22,7 @@ Check Parsing Module
 Commit Lookup Module
 --------------------
 
-.. automodule:: sw_metadata_bot.commit_lookup
+.. automodule:: rsmetacheck_bot.commit_lookup
    :members:
    :undoc-members:
    :show-inheritance:
@@ -30,7 +30,7 @@ Commit Lookup Module
 Config Utils Module
 -------------------
 
-.. automodule:: sw_metadata_bot.config_utils
+.. automodule:: rsmetacheck_bot.config_utils
    :members:
    :undoc-members:
    :show-inheritance:
@@ -38,7 +38,7 @@ Config Utils Module
 RSMetaCheck Wrapper Module
 --------------------------
 
-.. automodule:: sw_metadata_bot.rsmetacheck_wrapper
+.. automodule:: rsmetacheck_bot.rsmetacheck_wrapper
    :members:
    :undoc-members:
    :show-inheritance:
@@ -46,7 +46,7 @@ RSMetaCheck Wrapper Module
 GitHub API Module
 -----------------
 
-.. automodule:: sw_metadata_bot.github_api
+.. automodule:: rsmetacheck_bot.github_api
    :members:
    :undoc-members:
    :show-inheritance:
@@ -54,7 +54,7 @@ GitHub API Module
 GitLab API Module
 -----------------
 
-.. automodule:: sw_metadata_bot.gitlab_api
+.. automodule:: rsmetacheck_bot.gitlab_api
    :members:
    :undoc-members:
    :show-inheritance:
@@ -62,7 +62,7 @@ GitLab API Module
 History Module
 --------------
 
-.. automodule:: sw_metadata_bot.history
+.. automodule:: rsmetacheck_bot.history
    :members:
    :undoc-members:
    :show-inheritance:
@@ -70,7 +70,7 @@ History Module
 Incremental Module
 ------------------
 
-.. automodule:: sw_metadata_bot.incremental
+.. automodule:: rsmetacheck_bot.incremental
    :members:
    :undoc-members:
    :show-inheritance:
@@ -78,7 +78,7 @@ Incremental Module
 Main Module
 -----------
 
-.. automodule:: sw_metadata_bot.main
+.. automodule:: rsmetacheck_bot.main
    :members:
    :undoc-members:
    :show-inheritance:
@@ -87,7 +87,7 @@ Main Module
 Pipeline Module
 ---------------
 
-.. automodule:: sw_metadata_bot.pipeline
+.. automodule:: rsmetacheck_bot.pipeline
    :members:
    :undoc-members:
    :show-inheritance:
@@ -95,7 +95,7 @@ Pipeline Module
 Pitfalls Module
 ---------------
 
-.. automodule:: sw_metadata_bot.pitfalls
+.. automodule:: rsmetacheck_bot.pitfalls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -103,7 +103,7 @@ Pitfalls Module
 Publish Module
 --------------
 
-.. automodule:: sw_metadata_bot.publish
+.. automodule:: rsmetacheck_bot.publish
    :members:
    :undoc-members:
    :show-inheritance:
@@ -111,7 +111,7 @@ Publish Module
 Token Resolver Module
 ---------------------
 
-.. automodule:: sw_metadata_bot.token_resolver
+.. automodule:: rsmetacheck_bot.token_resolver
    :members:
    :undoc-members:
    :show-inheritance:
@@ -119,7 +119,7 @@ Token Resolver Module
 Verify Tokens Module
 --------------------
 
-.. automodule:: sw_metadata_bot.verify_tokens
+.. automodule:: rsmetacheck_bot.verify_tokens
    :members:
    :undoc-members:
    :show-inheritance:

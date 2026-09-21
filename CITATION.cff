@@ -2,7 +2,7 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: sw-metadata-bot
+title: rsmetacheck-bot
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
@@ -18,7 +18,7 @@ identifiers:
     value: 10.5281/zenodo.19468976
   - type: swh
     value: 'swh:1:dir:9f3d474c040158cc675e8db135767e0d2d3fba7b'
-repository-code: 'https://github.com/SoftwareUnderstanding/sw-metadata-bot'
+repository-code: 'https://github.com/SoftwareUnderstanding/rsmetacheck-bot'
 url: 'https://w3id.org/codemetasoft/'
 abstract: >-
   A repository to keep the code of the RSMetaCheck bot for

@@ -1,6 +1,6 @@
 """Tests for __init__ module."""
 
-from sw_metadata_bot import __version__
+from rsmetacheck_bot import __version__
 
 
 def test_version_is_set():

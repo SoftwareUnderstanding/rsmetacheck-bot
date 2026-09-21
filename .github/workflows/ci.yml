@@ -41,7 +41,7 @@ jobs:
           dependency-group: dev
 
       - name: Run Bandit security linter
-        run: uv run bandit -c pyproject.toml -r src/sw_metadata_bot/
+        run: uv run bandit -c pyproject.toml -r src/rsmetacheck_bot/
 
   interrogate:
       name: Interrogate badge
@@ -55,7 +55,7 @@ jobs:
           dependency-group: dev
 
       - name: Interrogate (docstring coverage)
-        run: uv run interrogate -c pyproject.toml -v src/sw_metadata_bot/
+        run: uv run interrogate -c pyproject.toml -v src/rsmetacheck_bot/
       
       - name: Commit interrogate badge
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -81,14 +81,14 @@ jobs:
 
       - name: Runtime smoke checks
         run: |
-          uv run python -c "import sw_metadata_bot; import rsmetacheck; print('Runtime imports OK')"
-          uv run sw-metadata-bot run-analysis --help
-          uv run sw-metadata-bot publish --help
+          uv run python -c "import rsmetacheck_bot; import rsmetacheck; print('Runtime imports OK')"
+          uv run rsmetacheck-bot run-analysis --help
+          uv run rsmetacheck-bot publish --help
 
       - name: Run pytest unit tests with coverage
         run: |
           uv run pytest -m "not integration_gitlab" \
-            --cov=src/sw_metadata_bot \
+            --cov=src/rsmetacheck_bot \
             --cov-report=term-missing \
             --cov-report=xml:coverage.xml \
             tests/
@@ -117,7 +117,7 @@ jobs:
         uses: ./.github/actions/setup-uv
 
       - name: Run small analysis without publishing
-        run: uv run sw-metadata-bot run-analysis --config-file assets/example_list_repo.json
+        run: uv run rsmetacheck-bot run-analysis --config-file assets/example_list_repo.json
 
   test-gitlab-integration:
     name: Test (GitLab integration)
@@ -139,7 +139,7 @@ jobs:
           exit 0
 
       - name: Verify GitLab token before integration tests
-        run: uv run sw-metadata-bot verify-tokens --gitlab
+        run: uv run rsmetacheck-bot verify-tokens --gitlab
 
       - name: Run GitLab integration tests
         run: uv run pytest --run-integration-gitlab -m "integration_gitlab" tests/test_gitlab_integration.py
@@ -254,5 +254,5 @@ jobs:
           eossr-upload-repository \
             --token "${{ secrets.ZENODO_ACCESS_TOKEN }}" \
             --input-dir . \
-            --archive-name "sw-metadata-bot-${{ github.event.release.tag_name }}.zip" \
+            --archive-name "rsmetacheck-bot-${{ github.event.release.tag_name }}.zip" \
             --record_id "${{ secrets.ZENODO_DEPOSITION_ID }}"

@@ -1,7 +1,7 @@
 import json
 
-from sw_metadata_bot.report_summary import summarize_analysis_folder
-from sw_metadata_bot.reporting import load_report
+from rsmetacheck_bot.report_summary import summarize_analysis_folder
+from rsmetacheck_bot.reporting import load_report
 
 
 def test_load_report_and_summarize_analysis_folder(tmp_path):

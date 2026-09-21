@@ -1,6 +1,6 @@
 """Tests for configuration and platform handling."""
 
-from sw_metadata_bot.config.config_utils import (
+from rsmetacheck_bot.config.config_utils import (
     detect_platform,
     normalize_repo_url,
     sanitize_repo_name,

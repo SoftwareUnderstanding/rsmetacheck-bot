@@ -1,7 +1,7 @@
 """Tests for API token resolution precedence."""
 
-from sw_metadata_bot.github_api import GitHubAPI
-from sw_metadata_bot.gitlab_api import GitLabAPI
+from rsmetacheck_bot.github_api import GitHubAPI
+from rsmetacheck_bot.gitlab_api import GitLabAPI
 
 
 def test_github_explicit_token_has_priority(monkeypatch, tmp_path):
