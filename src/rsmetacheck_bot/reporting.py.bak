@@ -277,7 +277,7 @@ def build_record_entry(
         "warnings_count": analysis.warnings_count,
         "issue_url": lifecycle_data.issue_url,
         "analysis_date": analysis.analysis_date,
-        constants.VERSION_FIELD_BOT: analysis.bot_version,
+        "sw_metadata_bot_version": analysis.bot_version,
         "rsmetacheck_version": analysis.rsmetacheck_version,
         "pitfalls_ids": analysis.pitfalls_ids or [],
         "warnings_ids": analysis.warnings_ids or [],
