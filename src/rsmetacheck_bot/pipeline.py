@@ -176,7 +176,7 @@ def run_pipeline(
     evaluated_repositories: dict[str, dict[str, str]] = {}
     run_records: list[dict[str, object]] = []
 
-    for repo_url in repositories:
+    for idx, repo_url in enumerate(repositories, start=1):
         # Choose base folder for per-repo state: flattened under the run root
         # when enabled, otherwise keep per-snapshot nesting.
         base_for_repo = run_root if config.get_flatten_repo_layout() else analysis_root
@@ -194,6 +194,9 @@ def run_pipeline(
         )
 
         try:
+            click.echo(
+                f"[run-analysis] ({idx}/{len(repositories)}) Analyzing {repo_url} ..."
+            )
             current_commit_id = commit_lookup.get_repo_head_commit(repo_url)
         except Exception:
             current_commit_id = None
@@ -217,6 +220,9 @@ def run_pipeline(
                         previous_repo_folder, repo_folder
                     )
                     reused_previous = True
+                    click.echo(
+                        f"[run-analysis] Reused previous artifacts for {repo_url}"
+                    )
 
             if not reused_previous:
                 analysis_runtime.run_metacheck_for_repo(
@@ -226,6 +232,7 @@ def run_pipeline(
                     rsmetacheck_config_file=rsmetacheck_config_file,
                     rsmetacheck_config_profile=rsmetacheck_config_profile,
                 )
+                click.echo(f"[run-analysis] Completed analysis for {repo_url}")
 
             normalized_repo = analysis_runtime.normalize_repo_url(repo_url)
             if normalized_repo in opt_out_repos:
@@ -288,6 +295,7 @@ def run_pipeline(
                 repo_state.build_analysis_current_state(record),
             )
         except Exception as exc:
+            click.echo(f"[run-analysis] Error analyzing {repo_url}: {exc}", err=True)
             record = build_record_entry(
                 run_root=run_root,
                 repo_url=repo_url,

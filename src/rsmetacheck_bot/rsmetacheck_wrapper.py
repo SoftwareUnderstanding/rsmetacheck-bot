@@ -3,6 +3,7 @@
 import sys
 from pathlib import Path
 
+import click
 from rsmetacheck import cli as rsmetacheck_cli
 
 
@@ -48,10 +49,19 @@ def run_rsmetacheck(
     original_argv = sys.argv
     try:
         sys.argv = argv
+        click.echo(f"[rsmetacheck] running: {' '.join(argv)}")
         rsmetacheck_cli()
     except SystemExit as exc:
+        # Print a helpful message when rsmetacheck exits with a non-zero code
         if exc.code not in {0, None}:
+            click.echo(
+                f"[rsmetacheck] exited with code {exc.code} for input {input_source}",
+                err=True,
+            )
             return
+        raise
+    except Exception as exc:  # pragma: no cover - defensive
+        click.echo(f"[rsmetacheck] unexpected error: {exc}", err=True)
         raise
     finally:
         sys.argv = original_argv
