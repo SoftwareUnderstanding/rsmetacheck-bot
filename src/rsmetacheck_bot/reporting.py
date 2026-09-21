@@ -83,7 +83,7 @@ class ReportRecord:
             "warnings_count": self.warnings_count,
             "issue_url": self.issue_url,
             "analysis_date": self.analysis_date,
-            "rsmetacheck_bot_version": self.rsmetacheck_bot_version,
+            constants.VERSION_FIELD_BOT: self.rsmetacheck_bot_version,
             "rsmetacheck_version": self.rsmetacheck_version,
             "pitfalls_ids": list(self.pitfalls_ids),
             "warnings_ids": list(self.warnings_ids),
@@ -107,10 +107,14 @@ class ReportRecord:
     def get_tool_metadata(self) -> "ToolMetadata":
         """Retrieve tool versions information"""
         rsmetacheck_bot_version = (
-            self.rsmetacheck_bot_version if self.rsmetacheck_bot_version is not None else "unknown"
+            self.rsmetacheck_bot_version
+            if self.rsmetacheck_bot_version is not None
+            else "unknown"
         )
         rsmetacheck_version = (
-            self.rsmetacheck_version if self.rsmetacheck_version is not None else "unknown"
+            self.rsmetacheck_version
+            if self.rsmetacheck_version is not None
+            else "unknown"
         )
         return ToolMetadata(rsmetacheck_bot_version, rsmetacheck_version)
 
@@ -151,13 +155,13 @@ class ToolMetadata:
     """Intermediate class to represent the rsmetacheck-bot metadata"""
 
     rsmetacheck_bot_version: str = "unknown"
-    rs_metacheck_version: str = "unknown"
+    rsmetacheck_version: str = "unknown"
 
     def to_dict(self):
         """Convert to dict"""
         return {
-            "sw_metadata_bot_version": self.sw_metadata_bot_version,
-            "rsmetacheck_version": self.rs_metacheck_version,
+            constants.VERSION_FIELD_BOT: self.rsmetacheck_bot_version,
+            "rsmetacheck_version": self.rsmetacheck_version,
         }
 
 
