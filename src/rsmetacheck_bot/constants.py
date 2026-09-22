@@ -78,6 +78,10 @@ VERSION_FIELD_BOT = "rsmetacheck_bot_version"
 VERSION_FIELD_BOT_LEGACY = "bot_version"
 """Legacy/deprecated field name for bot version (used in analysis_runtime.py parameter names)."""
 
+# Legacy key used before the refactor (old project name)
+VERSION_FIELD_SW_METADATA_LEGACY = "sw_metadata_bot_version"
+"""Legacy field name used in older outputs before renaming the project."""
+
 VERSION_FIELD_RSMETACHECK = "rsmetacheck_version"
 """Field name for RSMetacheck/metacheck version (the analyzer tool version)."""
 
@@ -86,6 +90,7 @@ VERSION_FIELDS_ALL = frozenset(
     {
         VERSION_FIELD_BOT,
         VERSION_FIELD_BOT_LEGACY,
+        VERSION_FIELD_SW_METADATA_LEGACY,
         VERSION_FIELD_RSMETACHECK,
     }
 )

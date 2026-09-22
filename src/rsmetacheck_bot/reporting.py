@@ -9,6 +9,24 @@ from typing import Any, Mapping
 from . import constants
 
 
+def extract_bot_version(data: Mapping[str, Any]) -> str | None:
+    """Return the first bot-version value found in `data` using the canonical
+    and legacy field names defined in `constants.VERSION_FIELDS_ALL`.
+
+    Returns None if no matching value is present.
+    """
+    if data is None:
+        return None
+    for key in constants.VERSION_FIELDS_ALL:
+        try:
+            val = data.get(key)
+        except Exception:
+            val = None
+        if isinstance(val, str) and val:
+            return val
+    return None
+
+
 @dataclass(frozen=True)
 class RecordAnalysis:
     """Core analysis fields persisted for each repository record."""
@@ -128,10 +146,10 @@ class ReportRecord:
             warnings_count=data.get("warnings_count"),
             issue_url=data.get("issue_url"),
             analysis_date=data.get("analysis_date"),
-            rsmetacheck_bot_version=data.get("rsmetacheck_bot_version"),
             rsmetacheck_version=data.get("rsmetacheck_version"),
             pitfalls_ids=tuple(data.get("pitfalls_ids") or ()),
             warnings_ids=tuple(data.get("warnings_ids") or ()),
+            rsmetacheck_bot_version=extract_bot_version(data),
             action=data.get("action"),
             reason_code=data.get("reason_code"),
             previous_issue_url=data.get("previous_issue_url"),
