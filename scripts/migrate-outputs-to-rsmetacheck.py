@@ -16,7 +16,7 @@ import argparse
 import json
 from pathlib import Path
 
-from rsmetacheck_bot import reporting, constants
+from rsmetacheck_bot import constants, reporting
 
 
 def migrate_payload(path: Path, apply: bool) -> int:

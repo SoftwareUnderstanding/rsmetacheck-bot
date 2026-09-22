@@ -17,11 +17,16 @@ def extract_bot_version(data: Mapping[str, Any]) -> str | None:
     """
     if data is None:
         return None
-    for key in constants.VERSION_FIELDS_ALL:
-        try:
-            val = data.get(key)
-        except Exception:
-            val = None
+    # Prefer the canonical bot version field, then known legacy names.
+    priority = (
+        constants.VERSION_FIELD_BOT,
+        getattr(constants, "VERSION_FIELD_SW_METADATA_LEGACY", None),
+        constants.VERSION_FIELD_BOT_LEGACY,
+    )
+    for key in priority:
+        if not key:
+            continue
+        val = data.get(key)
         if isinstance(val, str) and val:
             return val
     return None
