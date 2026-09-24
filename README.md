@@ -9,7 +9,8 @@
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 ![coverage](coverage.svg)
 ![interrogate](interrogate_badge.svg)
-[![RsMetaCheck Validation](https://github.com/SoftwareUnderstanding/rsmetacheck-bot/actions/workflows/rsmetacheck.yml/badge.svg)](https://github.com/SoftwareUnderstanding/rsmetacheck-bot/actions/workflows/rsmetacheck.yml)
+[![rsmetacheck Validation](https://github.com/SoftwareUnderstanding/sw-metadata-bot/actions/workflows/rsmetacheck.yml/badge.svg)](https://github.com/SoftwareUnderstanding/sw-metadata-bot/actions/workflows/rsmetacheck.yml)
+
 
 An automated bot that analyzes repository metadata quality and creates issues with improvement suggestions.
 
@@ -59,7 +60,7 @@ Simply comment **"unsubscribe"** on the issue and we'll remove your repository f
 
 ## 🔍 What Analysis Is Used
 
-This bot uses [RSMetaCheck](https://github.com/SoftwareUnderstanding/RsMetaCheck), which analyzes:
+This bot uses [rsmetacheck](https://github.com/SoftwareUnderstanding/rsmetacheck), which analyzes:
 
 - Software metadata completeness
 - Citation and documentation quality
@@ -76,7 +77,7 @@ The bot **does not**:
 ## 📚 Learn More
 
 - [CodeMetaSoft Project](https://w3id.org/codemetasoft) - About the initiative
-- [RSMetaCheck](https://github.com/SoftwareUnderstanding/RsMetaCheck) - The analysis tool
+- [rsmetacheck](https://github.com/SoftwareUnderstanding/rsmetacheck) - The analysis tool
 - [Citation File Format](https://citation-file-format.github.io/) - How to add CITATION.cff
 
 ---

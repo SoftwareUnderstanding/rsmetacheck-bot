@@ -79,7 +79,7 @@
   "releaseNotes": "## What's Changed\n* Fix beta test feedbacks by @francoto in https://github.com/SoftwareUnderstanding/rsmetacheck-bot/pull/7\n\n\n**Full Changelog**: https://github.com/SoftwareUnderstanding/rsmetacheck-bot/compare/v0.1.0...v0.1.1",
   "softwareRequirements": [
     "click>=8.3.1",
-    "rsmetacheck>=0.2.1",
+    "rsmetacheck>=0.3.6",
     "python-dotenv>=1.0.0",
     "requests>=2.32.5"
   ],
