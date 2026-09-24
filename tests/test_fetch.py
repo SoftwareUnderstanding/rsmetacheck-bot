@@ -5,8 +5,8 @@ from pathlib import Path
 
 from click.testing import CliRunner
 
-from sw_metadata_bot import fetch as fetch_module
-from sw_metadata_bot.config.schemas import BotConfig
+from rsmetacheck_bot import fetch as fetch_module
+from rsmetacheck_bot.config.schemas import BotConfig
 
 
 class _FakeIssueClient:

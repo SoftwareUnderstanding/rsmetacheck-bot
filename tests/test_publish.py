@@ -73,7 +73,7 @@ def _write_run_report(snapshot_dir, records, run_metadata=None):
         repo_url = record.get("repo_url")
         if not isinstance(repo_url, str) or not repo_url:
             continue
-        from sw_metadata_bot.config.config_utils import sanitize_repo_name
+        from rsmetacheck_bot.config.config_utils import sanitize_repo_name
 
         repo_folder = snapshot_dir / sanitize_repo_name(repo_url)
         repo_folder.mkdir(parents=True, exist_ok=True)

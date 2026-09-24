@@ -8,8 +8,8 @@ import shutil
 from pathlib import Path
 from typing import Any
 
-from sw_metadata_bot import constants, repo_state
-from sw_metadata_bot.config.config_utils import sanitize_repo_name
+from rsmetacheck_bot import constants, repo_state
+from rsmetacheck_bot.config.config_utils import sanitize_repo_name
 
 
 def _iter_legacy_repo_dirs(snapshot_root: Path) -> list[Path]:

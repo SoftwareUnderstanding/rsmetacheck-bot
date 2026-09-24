@@ -9,7 +9,7 @@ services:
     container_name: rsmetacheck-bot
     environment:
       # Configuration - customize as needed
-      SW_METADATA_BOT_CONFIG: /app/config.json
+      RSMETACHECK_BOT_CONFIG: /app/config.json
       # Optional: Add GitHub/GitLab tokens via environment
       # GITHUB_TOKEN: ${GITHUB_TOKEN}
       # GITLAB_TOKEN: ${GITLAB_TOKEN}

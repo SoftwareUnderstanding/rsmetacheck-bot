@@ -3,9 +3,9 @@ import json
 from click.testing import CliRunner
 
 from conversion.convert_legacy_outputs import convert_legacy_output_tree
-from sw_metadata_bot.main import cli
-from sw_metadata_bot.pipeline import run_analysis_command
-from sw_metadata_bot.publish import publish_command, simulate_publish_command
+from rsmetacheck_bot.main import cli
+from rsmetacheck_bot.pipeline import run_analysis_command
+from rsmetacheck_bot.publish import publish_command, simulate_publish_command
 
 
 def test_convert_legacy_output_tree_creates_repo_state_layout(tmp_path):
