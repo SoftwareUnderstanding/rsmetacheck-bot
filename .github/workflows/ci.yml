@@ -24,10 +24,10 @@ jobs:
           dependency-group: dev
 
       - name: Ruff format (check)
-        run: uv run ruff format --check
+        run: uv run --extra dev ruff format --check
 
       - name: Ruff check
-        run: uv run ruff check --output-format=github
+        run: uv run --extra dev ruff check --output-format=github
 
   security:
     name: Security (Bandit)
@@ -41,7 +41,7 @@ jobs:
           dependency-group: dev
 
       - name: Run Bandit security linter
-        run: uv run bandit -c pyproject.toml -r src/rsmetacheck_bot/
+        run: uv run --extra dev bandit -c pyproject.toml -r src/rsmetacheck_bot/
 
   interrogate:
       name: Interrogate badge
@@ -55,7 +55,7 @@ jobs:
           dependency-group: dev
 
       - name: Interrogate (docstring coverage)
-        run: uv run interrogate -c pyproject.toml -v src/rsmetacheck_bot/
+        run: uv run --extra dev interrogate -c pyproject.toml -v src/rsmetacheck_bot/
       
       - name: Commit interrogate badge
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -87,14 +87,14 @@ jobs:
 
       - name: Run pytest unit tests with coverage
         run: |
-          uv run pytest -m "not integration_gitlab" \
+          uv run --extra test pytest -m "not integration_gitlab" \
             --cov=src/rsmetacheck_bot \
             --cov-report=term-missing \
             --cov-report=xml:coverage.xml \
             tests/
             
       - name: Generate coverage badge
-        run: uv run genbadge coverage -i coverage.xml -o coverage.svg
+        run: uv run --extra test genbadge coverage -i coverage.xml -o coverage.svg
         continue-on-error: true
 
       - name: Commit coverage badge
@@ -142,7 +142,7 @@ jobs:
         run: uv run rsmetacheck-bot verify-tokens --gitlab
 
       - name: Run GitLab integration tests
-        run: uv run pytest --run-integration-gitlab -m "integration_gitlab" tests/test_gitlab_integration.py
+        run: uv run --extra test pytest --run-integration-gitlab -m "integration_gitlab" tests/test_gitlab_integration.py
 
 
   test-zenodo-connection:
@@ -185,7 +185,7 @@ jobs:
           dependency-group: docs
 
       - name: Build Sphinx HTML
-        run: uv run sphinx-build -b html docs docs/_build/html
+        run: uv run --extra docs sphinx-build -b html docs docs/_build/html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
