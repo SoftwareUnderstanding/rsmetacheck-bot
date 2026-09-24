@@ -18,41 +18,6 @@ Developer and maintainer steps to install, configure, and run rsmetacheck-bot.
 Git is a system dependency used for repository commit lookup
 (``git ls-remote`` fallback) and is not installed through ``pyproject.toml``.
 
-## Install
-
-### Use the package CLI
-
-After cloning this project, set up the python environnment with uv:
-
-```bash
-uv sync
-```
-
-This will create the virtual environnment, download the dependencies and build the package locally.
-
-### Use this package as dependency
-
-With `uv` (recommended):
-
-```bash
-uv add rsmetacheck-bot
-```
-
-Or with pip
-With `pip`:
-
-```bash
-pip install rsmetacheck-bot
-```
-
-The package metadata also exposes standard extras for release builds:
-
-```bash
-pip install "rsmetacheck-bot[docs]"
-pip install "rsmetacheck-bot[test]"
-pip install "rsmetacheck-bot[dev]"
-```
-
 ## Configure authentication
 
 Export your tokens (only set what you need):
