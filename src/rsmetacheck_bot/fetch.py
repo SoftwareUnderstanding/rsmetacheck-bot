@@ -294,12 +294,17 @@ def fetch_analysis(
         )
 
         if verbose:
-            short_status = (
+            # Stored status from the analysis/publish run (reason_code or previous state)
+            stored_status = (
                 record.get("previous_issue_state")
                 or record.get("reason_code")
                 or "processed"
             )
-            click.echo(f"FETCH {repo_url}: {short_status}")
+            # Live status derived from the API call (unsubscribed/closed/commented)
+            api_unsubscribe_detected = record.get("unsubscribe_detected", False)
+            api_issue_closed = record.get("previous_issue_state") == "closed"
+            live_status = _fetch_status(api_unsubscribe_detected, api_issue_closed)
+            click.echo(f"FETCH {repo_url}: stored={stored_status} live={live_status}")
 
         # Log fetch event to repo-centric event log
         repo_url = record.get("repo_url")
