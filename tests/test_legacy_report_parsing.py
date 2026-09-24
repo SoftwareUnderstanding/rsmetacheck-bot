@@ -4,7 +4,7 @@ from rsmetacheck_bot import reporting
 def test_extract_bot_version_from_legacy_keys():
     assert reporting.extract_bot_version({"bot_version": "1.2.3"}) == "1.2.3"
     assert (
-        reporting.extract_bot_version({"sw_metadata_bot_version": "2.0.0"}) == "2.0.0"
+        reporting.extract_bot_version({"rsmetacheck_bot_version": "2.0.0"}) == "2.0.0"
     )
     assert (
         reporting.extract_bot_version({"rsmetacheck_bot_version": "3.0.0"}) == "3.0.0"

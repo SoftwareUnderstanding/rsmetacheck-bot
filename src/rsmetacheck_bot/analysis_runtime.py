@@ -7,6 +7,8 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Any
 
+import click
+
 from . import __version__, constants, history, incremental, pitfalls, utils
 from .check_parsing import extract_check_ids
 from .codemeta_runtime import evaluate_and_persist_codemeta_status, load_codemeta_status
@@ -468,6 +470,7 @@ def standardize_metacheck_outputs(repo_folder: Path) -> None:
                 constants.FILENAME_ANALYSIS_RESULTS,
                 constants.FILENAME_CONFIG_SNAPSHOT,
                 constants.FILENAME_RUN_REPORT,
+                constants.FILENAME_PITFALL,
             }
             and _looks_like_codemeta_payload(path)
         ]
@@ -495,6 +498,7 @@ def run_metacheck_for_repo(
     ) as temp_file:
         temp_analysis_file = Path(temp_file.name)
 
+    click.echo(f"[metacheck] running rsmetacheck for {repo_url}")
     run_rsmetacheck(
         input_source=repo_url,
         somef_output=str(repo_folder),
@@ -514,6 +518,15 @@ def run_metacheck_for_repo(
         repo_folder=repo_folder,
         generate_if_missing=generate_codemeta_if_missing,
     )
+    # Report basic artifact presence so users see whether SOMEF/pitfalls were produced
+    produced = []
+    if (repo_folder / constants.FILENAME_PITFALL).exists():
+        produced.append(constants.FILENAME_PITFALL)
+    if (repo_folder / constants.FILENAME_SOMEF_OUTPUT).exists():
+        produced.append(constants.FILENAME_SOMEF_OUTPUT)
+    if (repo_folder / constants.FILENAME_CODEMETA_GENERATED).exists():
+        produced.append(constants.FILENAME_CODEMETA_GENERATED)
+    click.echo(f"[metacheck] produced for {repo_url}: {', '.join(produced) or 'none'}")
 
 
 def build_analysis_counters(records: list[dict[str, object]]) -> dict[str, int]:

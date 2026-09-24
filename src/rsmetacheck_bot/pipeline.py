@@ -9,7 +9,7 @@ import click
 
 from rsmetacheck_bot.config.schemas import BotConfig
 
-from . import __version__, analysis_runtime, commit_lookup, constants
+from . import __version__, analysis_runtime, commit_lookup, constants, repo_state
 from .config.config_utils import detect_platform, sanitize_repo_name
 from .reporting import RecordAnalysis, RecordLifecycle, build_record_entry
 
@@ -145,6 +145,11 @@ def run_pipeline(
     requested_snapshot_tag = config.resolve_snapshot_tag(snapshot_tag)
 
     run_root = output_root / run_folder_name
+    if run_root.exists():
+        repo_state.require_repo_centric_layout(
+            run_root,
+            command_name="run-analysis",
+        )
     run_root.mkdir(parents=True, exist_ok=True)
     resolved_snapshot_tag = _resolve_unique_snapshot_tag(
         run_root=run_root,
@@ -171,10 +176,13 @@ def run_pipeline(
     evaluated_repositories: dict[str, dict[str, str]] = {}
     run_records: list[dict[str, object]] = []
 
-    for repo_url in repositories:
-        per_repo = analysis_runtime.resolve_per_repo_paths(analysis_root, repo_url)
+    for idx, repo_url in enumerate(repositories, start=1):
+        # Choose base folder for per-repo state: flattened under the run root
+        # when enabled, otherwise keep per-snapshot nesting.
+        base_for_repo = run_root if config.get_flatten_repo_layout() else analysis_root
+        per_repo = repo_state.resolve_repo_state_paths(base_for_repo, repo_url)
         repo_folder = per_repo["repo_folder"]
-        repo_folder.mkdir(parents=True, exist_ok=True)
+        repo_state.ensure_repo_state_dirs(per_repo)
 
         previous_record = analysis_runtime.load_previous_repo_record(
             previous_snapshot_root, repo_url
@@ -186,6 +194,9 @@ def run_pipeline(
         )
 
         try:
+            click.echo(
+                f"[run-analysis] ({idx}/{len(repositories)}) Analyzing {repo_url} ..."
+            )
             current_commit_id = commit_lookup.get_repo_head_commit(repo_url)
         except Exception:
             current_commit_id = None
@@ -209,6 +220,9 @@ def run_pipeline(
                         previous_repo_folder, repo_folder
                     )
                     reused_previous = True
+                    click.echo(
+                        f"[run-analysis] Reused previous artifacts for {repo_url}"
+                    )
 
             if not reused_previous:
                 analysis_runtime.run_metacheck_for_repo(
@@ -218,6 +232,7 @@ def run_pipeline(
                     rsmetacheck_config_file=rsmetacheck_config_file,
                     rsmetacheck_config_profile=rsmetacheck_config_profile,
                 )
+                click.echo(f"[run-analysis] Completed analysis for {repo_url}")
 
             normalized_repo = analysis_runtime.normalize_repo_url(repo_url)
             if normalized_repo in opt_out_repos:
@@ -242,7 +257,7 @@ def run_pipeline(
                         current_commit_id=current_commit_id,
                         dry_run=dry_run,
                         issue_persistence="none",
-                        file_path=repo_folder / "pitfall.jsonld",
+                        file_path=repo_folder / constants.FILENAME_PITFALL,
                     ),
                 )
             else:
@@ -265,7 +280,22 @@ def run_pipeline(
                 analysis_summary_file=analysis_report_path,
                 previous_report=resolved_previous_report,
             )
+
+            archive_path = repo_state.write_analysis_archive(repo_folder, record)
+            repo_state.append_event_log(
+                repo_folder,
+                {
+                    "event": "analysis_completed",
+                    "commit_id": current_commit_id or "unknown",
+                    "analysis_file": str(archive_path.relative_to(repo_folder)),
+                },
+            )
+            repo_state.write_current_state(
+                repo_folder,
+                repo_state.build_analysis_current_state(record),
+            )
         except Exception as exc:
+            click.echo(f"[run-analysis] Error analyzing {repo_url}: {exc}", err=True)
             record = build_record_entry(
                 run_root=run_root,
                 repo_url=repo_url,

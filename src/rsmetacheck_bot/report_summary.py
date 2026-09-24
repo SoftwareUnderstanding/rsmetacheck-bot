@@ -19,6 +19,12 @@ from .reporting import RunReport, load_report
 )
 def summarize_report_command(analysis_root: Path):
     """Summarize report.json file and save the summary file in the analysis root folder."""
+    from . import repo_state
+
+    repo_state.require_repo_centric_layout(
+        analysis_root,
+        command_name="report-summary",
+    )
     summary = summarize_analysis_folder(analysis_root)
 
     save_summary_report(analysis_root, summary)
@@ -119,8 +125,12 @@ def save_summary_report(analysis_folder: Path, summary_data: dict):
         summary_path = analysis_folder / constants.FILENAME_REPORT_SUMMARY
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(summary_data, f, indent=2)
+        click.echo(f"WROTE SUMMARY: {summary_path}")
+        click.echo(
+            f"Repositories: {summary_data.get('repository_count', 0)}, findings: {summary_data.get('total_pitfalls', 0)} pitfalls, {summary_data.get('total_warnings', 0)} warnings"
+        )
     else:
-        print("Error: No summary info")
+        click.echo("Error: No summary info")
 
 
 if __name__ == "__main__":

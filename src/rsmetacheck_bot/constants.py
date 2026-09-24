@@ -79,7 +79,7 @@ VERSION_FIELD_BOT_LEGACY = "bot_version"
 """Legacy/deprecated field name for bot version (used in analysis_runtime.py parameter names)."""
 
 # Legacy key used before the refactor (old project name)
-VERSION_FIELD_SW_METADATA_LEGACY = "sw_metadata_bot_version"
+VERSION_FIELD_SW_METADATA_LEGACY = "rsmetacheck_bot_version"
 """Legacy field name used in older outputs before renaming the project."""
 
 VERSION_FIELD_RSMETACHECK = "rsmetacheck_version"
@@ -111,6 +111,9 @@ FILENAME_PITFALL = "pitfall.jsonld"
 FILENAME_REPORT = "report.json"
 """Per-repository unified report: single-record list with analysis results."""
 
+FILENAME_FETCH_DIFF = "fetch_diff.json"
+"""Fetch diff report listing records changed by a fetch invocation."""
+
 FILENAME_ISSUE_REPORT = "issue_report.md"
 """Markdown issue body: human-readable summary of findings."""
 
@@ -122,6 +125,18 @@ FILENAME_CODEMETA_GENERATED = "codemeta_generated.json"
 
 FILENAME_RUN_REPORT = "run_report.json"
 """Snapshot-level unified report: list of all repository records in snapshot."""
+
+FILENAME_EVENT_LOG = "event-log.jsonl"
+"""Append-only repository lifecycle audit log."""
+
+FILENAME_CURRENT_STATE = "current-state.json"
+"""High-performance repository state cache for the latest analysis and issue status."""
+
+DIRNAME_ANALYSES = "analyses"
+"""Directory containing archived analysis payloads."""
+
+DIRNAME_ISSUES = "issues"
+"""Directory containing per-issue lifecycle metadata."""
 
 FILENAME_ANALYSIS_RESULTS = "analysis_results.json"
 """Analysis summary: overall statistics and per-repo evaluation results."""
