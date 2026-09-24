@@ -160,6 +160,13 @@ def fetch_analysis(
 
     github_client_instance = github_client
     gitlab_client_instance = gitlab_client
+    verbose = True
+    # Respect run metadata 'quiet' flag when present
+    run_metadata = (
+        run_report.run_metadata if isinstance(run_report.run_metadata, dict) else {}
+    )
+    if run_metadata.get("quiet"):
+        verbose = False
 
     def issue_client_for_platform(platform: str):
         """get appropriate API"""
@@ -285,6 +292,14 @@ def fetch_analysis(
             analysis_summary_file,
             previous_report,
         )
+
+        if verbose:
+            short_status = (
+                record.get("previous_issue_state")
+                or record.get("reason_code")
+                or "processed"
+            )
+            click.echo(f"FETCH {repo_url}: {short_status}")
 
         # Log fetch event to repo-centric event log
         repo_url = record.get("repo_url")

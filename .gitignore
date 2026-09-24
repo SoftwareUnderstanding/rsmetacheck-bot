@@ -16,3 +16,4 @@ somef_outputs/*
 # docs
 docs/_build/
 site/
+assets/example_run

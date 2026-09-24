@@ -307,6 +307,10 @@ def publish_analysis(
     updated_records: list[dict[str, object]] = []
     skipped_published = 0
     skipped_failed_retry = 0
+    verbose = True
+    # Allow callers to set a flag on run_metadata to suppress verbose output
+    if isinstance(run_metadata, dict) and run_metadata.get("quiet"):
+        verbose = False
     for raw_record in records:
         if not isinstance(raw_record, dict):
             continue
@@ -393,6 +397,55 @@ def publish_analysis(
             attempted_action = action
 
             try:
+                # Defensive guard: ensure we don't create issues when the
+                # underlying snapshot contains no findings. This can occur
+                # when older snapshots predate the decision logic change.
+                if action == constants.ACTION_SIMULATED_CREATED:
+                    # Inspect pitfall file for findings; if none, skip create.
+                    # Resolve the repo folder then look for the pitfall file.
+                    try:
+                        paths = repo_state.resolve_repo_state_paths(
+                            analysis_root, repo_url
+                        )
+                        repo_folder = paths.get("repo_folder")
+                        pitfall_path = None
+                        if isinstance(repo_folder, Path):
+                            pitfall_path = repo_folder / constants.FILENAME_PITFALL
+                        if pitfall_path and pitfall_path.exists():
+                            data = pitfalls.load_pitfalls(pitfall_path)
+                            pitfalls_list = pitfalls.get_pitfalls_list(data)
+                            warnings_list = pitfalls.get_warnings_list(data)
+                            # If there are no findings, normally skip creation.
+                            # However, if codemeta is missing in the record, do
+                            # not skip — we still want to create an issue to
+                            # request codemeta presence (auto-generated codemeta
+                            # should be offered).
+                            codemeta_status = record.get("codemeta_status")
+                            if len(pitfalls_list) + len(warnings_list) == 0 and (
+                                not isinstance(codemeta_status, str)
+                                or codemeta_status.strip().lower() != "missing"
+                            ):
+                                record["action"] = constants.ACTION_SKIPPED
+                                record["reason_code"] = "no_findings_at_publish"
+                                record["dry_run"] = False
+                                record["issue_persistence"] = "none"
+                                record.pop("simulated_issue_url", None)
+                                updated_records.append(record)
+                                _write_per_repo_report(
+                                    analysis_root,
+                                    record,
+                                    analysis_summary_file,
+                                    previous_report,
+                                )
+                                if verbose:
+                                    click.echo(
+                                        f"SKIP {repo_url}: no findings at publish"
+                                    )
+                                continue
+                    except Exception:
+                        # If any error inspecting pitfalls, proceed with normal flow
+                        pass
+
                 if action in {
                     constants.ACTION_UPDATED_BY_COMMENT,
                     constants.ACTION_CLOSED,
@@ -470,6 +523,8 @@ def publish_analysis(
                     record["issue_persistence"] = "posted"
                     record.pop("simulated_issue_url", None)
                     _clear_failure_metadata(record)
+                    if verbose:
+                        click.echo(f"CREATED {repo_url} -> {created_url}")
 
                 elif action == constants.ACTION_UPDATED_BY_COMMENT:
                     if not issue_url:
@@ -489,6 +544,8 @@ def publish_analysis(
                     record["issue_persistence"] = "posted"
                     record.pop("simulated_issue_url", None)
                     _clear_failure_metadata(record)
+                    if verbose:
+                        click.echo(f"UPDATED (comment) {repo_url} -> {issue_url}")
 
                 elif action == constants.ACTION_CLOSED:
                     if not issue_url:
@@ -510,12 +567,16 @@ def publish_analysis(
                     record["issue_persistence"] = "posted"
                     record.pop("simulated_issue_url", None)
                     _clear_failure_metadata(record)
+                    if verbose:
+                        click.echo(f"CLOSED {repo_url} -> {issue_url}")
 
                 elif action == constants.ACTION_SKIPPED:
                     record["dry_run"] = False
                     record["issue_persistence"] = "none"
                     record.pop("simulated_issue_url", None)
                     _clear_failure_metadata(record)
+                    if verbose:
+                        click.echo(f"SKIPPED {repo_url}: {record.get('reason_code')}")
 
                 else:
                     if attempted_action == constants.ACTION_FAILED:
