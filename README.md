@@ -74,6 +74,20 @@ The bot **does not**:
 
 ---
 
+## Install
+
+### pip install
+
+```bash
+pip install rsmetacheck-bot
+```
+
+### uv
+
+```bash
+uv add rsmetacheck-bot
+```
+
 ## 📚 Learn More
 
 - [CodeMetaSoft Project](https://w3id.org/codemetasoft) - About the initiative
