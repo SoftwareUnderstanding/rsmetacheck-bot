@@ -17,7 +17,7 @@ dependencies = [
     "rsmetacheck>=0.3.6",
     "python-dotenv>=1.0.0",
     "requests>=2.32.5",
-    "setuptools[test]<83.0.0",
+    "setuptools[test]<85.0.0",
     "pydantic>=2.13.4",
 ]
 
