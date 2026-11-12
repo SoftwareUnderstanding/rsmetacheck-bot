@@ -4800,15 +4800,15 @@ wheels = [
 
 [[package]]
 name = "rsmetacheck"
-version = "0.3.7"
+version = "0.3.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
     { name = "somef" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f4/7e/ee0860ceb8a19cd58539585e3abfb7c95d854830408a2cf849718f91f8fa/rsmetacheck-0.3.7.tar.gz", hash = "sha256:356501ceaed1f170fc1cad832d6a14a335f2745d330e7976e595ecaef26bdea3", size = 55330, upload-time = "2026-11-04T16:24:05.697Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f8/41/5e4a230af6d065e923177242fd4e8b63cedce1350822a2673c4339d91512/rsmetacheck-0.3.8.tar.gz", hash = "sha256:5a705a43171ab77d089c5f8f1b45857774651217b3c907929bcd64b96b9c8a2b", size = 56389, upload-time = "2026-11-12T13:02:49.3Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f5/f5/2ba6f938966fbfb4f95f3d9d1bf60af8de50955309061babcdc7c03e97c1/rsmetacheck-0.3.7-py3-none-any.whl", hash = "sha256:e0c6cf4ae0bce810586cc5b29fc86ef84450f57109a690749329c851867dab00", size = 77199, upload-time = "2026-11-04T16:24:06.764Z" },
+    { url = "https://files.pythonhosted.org/packages/a8/70/696a46381b5f8ca76de7c365a85c63528e218617d203adced390c4125237/rsmetacheck-0.3.8-py3-none-any.whl", hash = "sha256:00935b26ded5fb2c807e7c2a4a627ad19278393fbb14e8a2c41bb465b1d4577c", size = 78287, upload-time = "2026-11-12T13:02:50.295Z" },
 ]
 
 [[package]]
@@ -4856,7 +4856,7 @@ requires-dist = [
     { name = "pytest-cov", marker = "extra == 'test'" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
     { name = "requests", specifier = ">=2.32.5" },
-    { name = "rsmetacheck", specifier = ">=0.3.6" },
+    { name = "rsmetacheck", specifier = ">=0.3.8" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.14.13" },
     { name = "setuptools", marker = "extra == 'test'", specifier = "<85.0.0" },
     { name = "setuptools", extras = ["test"], specifier = "<85.0.0" },
